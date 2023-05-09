@@ -82,22 +82,6 @@ function get_data_type( int $media_id ) {
  */
 function init() {
 
-	/**
-	 * Register custom pattern category
-	 *
-	 * @see https://developer.wordpress.org/reference/functions/register_block_pattern_category/
-	 */
-	if ( class_exists( '\WP_Block_Patterns_Registry' ) ) {
-
-		\register_block_pattern_category(
-			'touts',
-			array(
-				'label' => \_x( 'Heroes and touts.', 'Block pattern category', 'site-functionality' ),
-			)
-		);
-
-	}
-
 	if ( function_exists( '\wp_set_script_translations' ) ) {
 		/**
 		 * May be extended to wp_set_script_translations( 'my-handle', 'my-domain',

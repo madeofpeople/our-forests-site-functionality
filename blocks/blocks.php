@@ -7,12 +7,8 @@
  */
 namespace SiteFunctionality\Blocks;
 
-include_once \plugin_dir_path( __FILE__ ) . 'src/link-group/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/page-header/index.php';
+include_once \plugin_dir_path( __FILE__ ) . 'src/defender/index.php';
 include_once \plugin_dir_path( __FILE__ ) . 'src/page-nav/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/social-cards/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/tout/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/tout-linked/index.php';
 
 const TEMPLATE_PARAMS = array(
 	'filter_prefix'             => 'site_functionality',

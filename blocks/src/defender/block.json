@@ -1,0 +1,67 @@
+{
+    "apiVersion": 2,
+    "version": "1.0.0",
+    "textdomain": "site-functionality",
+    "name": "site-functionality/defender",
+    "title": "Defender",
+    "category": "text",
+    "collection": "site-functionality",
+    "icon": "id",
+    "className": "defender",
+    "description": "Display a defender element on page",
+    "keywords": [
+        "defender",
+        "social"
+    ],
+    "attributes": {
+        "id": {
+            "type": "number",
+            "default": 0
+        },
+        "url": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "source": "attribute",
+            "selector": "img",
+            "attribute": "alt",
+            "default": ""
+        },
+        "tagName": {
+            "type": "string",
+            "default": "article"
+        },
+        "layout": {
+            "type": "constrained"
+        }
+    },
+    "supports": {
+        "align": true,
+        "anchor": true,
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": false,
+            "link": false
+        },
+        "customClassName": true,
+        "spacing": {
+            "padding": false,
+            "margin": false,
+            "blockGap": true,
+            "__experimentalDefaultControls": {
+                "padding": true,
+                "blockGap": true
+            }
+        },
+        "defaultStylePicker": false,
+        "__experimentalLayout": false
+    },
+    "variations": [],
+    "styles": [],
+    "example": {},
+    "style": "file:../../build/style-index.css",
+    "editorScript": "site-functionality",
+    "editorStyle": "file:../../build/index.css"
+}

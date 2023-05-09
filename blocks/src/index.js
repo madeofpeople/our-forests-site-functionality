@@ -1,22 +1,14 @@
 import { registerBlockType, registerBlockCollection } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
-import './filters';
-
-import * as linkGroup from './link-group';
-import * as pageHeader from './page-header';
+import * as defender from './defender';
 import * as pageNav from './page-nav';
-import * as socialCards from './social-cards';
-import * as tout from './tout';
-import * as toutLinked from './tout-linked';
+import * as linkGroup from './link-group';
 
 const blocks = [
-	linkGroup,
-	pageHeader,
+	defender,
 	pageNav,
-	socialCards,
-	tout,
-	toutLinked
+	linkGroup
 ];
 
 /**

@@ -5,7 +5,7 @@
     "name": "site-functionality/link-group",
     "title": "Link Group",
     "icon": "admin-links",
-    "category": "touts",
+    "category": "text",
     "collection": "site-functionality",
     "description": "Display a linked group of blocks.",
     "keywords": [

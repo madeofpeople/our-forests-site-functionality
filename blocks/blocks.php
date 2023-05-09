@@ -7,12 +7,9 @@
  */
 namespace SiteFunctionality\Blocks;
 
-include_once \plugin_dir_path( __FILE__ ) . 'src/link-group/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/page-header/index.php';
+include_once \plugin_dir_path( __FILE__ ) . 'src/defender/index.php';
 include_once \plugin_dir_path( __FILE__ ) . 'src/page-nav/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/social-cards/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/tout/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/tout-linked/index.php';
+include_once \plugin_dir_path( __FILE__ ) . 'src/link-group/index.php';
 
 const TEMPLATE_PARAMS = array(
 	'filter_prefix'             => 'site_functionality',
@@ -82,22 +79,6 @@ function get_data_type( int $media_id ) {
  */
 function init() {
 
-	/**
-	 * Register custom pattern category
-	 *
-	 * @see https://developer.wordpress.org/reference/functions/register_block_pattern_category/
-	 */
-	if ( class_exists( '\WP_Block_Patterns_Registry' ) ) {
-
-		\register_block_pattern_category(
-			'touts',
-			array(
-				'label' => \_x( 'Heroes and touts.', 'Block pattern category', 'site-functionality' ),
-			)
-		);
-
-	}
-
 	if ( function_exists( '\wp_set_script_translations' ) ) {
 		/**
 		 * May be extended to wp_set_script_translations( 'my-handle', 'my-domain',
@@ -136,32 +117,10 @@ function enqueue_blocks_scripts() {
 function register_block_category( $block_categories, $block_editor_context ) {
 	return array_merge(
 		$block_categories,
-		array(
-			array(
-				'slug'  => 'touts',
-				'title' => \__( 'Touts', 'site-functionality' ),
-				'icon'  => 'announcement',
-			),
-			array(
-				'slug'  => 'text',
-				'title' => \__( 'Content', 'site-functionality' ),
-				'icon'  => 'paragraph-left',
-			),
-			array(
-				// make this the same 'slug' as action-network events
-				'slug'  => 'events',
-				'title' => \__( 'Events', 'site-functionality' ),
-				'icon'  => 'calendar',
-			),
-			array(
-				'slug'  => 'misc',
-				'title' => \__( 'Misc', 'site-functionality' ),
-				'icon'  => 'triangle-alert',
-			),
-		)
+		array()
 	);
 }
-\add_filter( 'block_categories_all', __NAMESPACE__ . '\register_block_category', 9, 2 );
+// \add_filter( 'block_categories_all', __NAMESPACE__ . '\register_block_category', 9, 2 );
 
 /**
  * Remove wpautop from blocks

@@ -87,7 +87,7 @@ const TEMPLATE = [
 						'core/paragraph',
 						{
 							className: 'defender__profile-content',
-							placeholder: __('Add description...', 'site-functionality'),
+							placeholder: __('Add bio...', 'site-functionality'),
 						}
 					]
 				]
@@ -95,7 +95,7 @@ const TEMPLATE = [
 			[
 				'core/group',
 				{
-					className: 'defender__location',
+					className: 'defender__forest',
 					layout: {
 						type: 'flex',
 						orientation: 'vertical'
@@ -105,23 +105,23 @@ const TEMPLATE = [
 					[
 						'core/image',
 						{
-							className: 'defender__location-image',
+							className: 'defender__forest-image',
 							sizeSlug: 'medium'
 						}
 					],
 					[
 						'core/heading',
 						{
-							className: 'defender__location-title',
-							placeholder: __('Add Location Name ...', 'site-functionality'),
+							className: 'defender__forest-title',
+							placeholder: __('Add Forest Name ...', 'site-functionality'),
 							level: 3
 						}
 					],
 					[
 						'core/paragraph',
 						{
-							className: 'defender__location-content',
-							placeholder: __('Add description...', 'site-functionality'),
+							className: 'defender__forest-content',
+							placeholder: __('Add forest description...', 'site-functionality'),
 						}
 					]
 				]

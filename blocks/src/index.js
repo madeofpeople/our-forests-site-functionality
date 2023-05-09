@@ -3,10 +3,12 @@ import { __ } from '@wordpress/i18n';
 
 import * as defender from './defender';
 import * as pageNav from './page-nav';
+import * as linkGroup from './link-group';
 
 const blocks = [
 	defender,
-	pageNav
+	pageNav,
+	linkGroup
 ];
 
 /**

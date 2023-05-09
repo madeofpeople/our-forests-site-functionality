@@ -2,7 +2,7 @@
 /**
  * Register and Render Block
  *
- * @since   1.0.0
+ * @since   1.0.1
  * @package Site_Functionality
  */
 namespace Site_Functionality\Blocks\Defender;
@@ -11,7 +11,6 @@ namespace Site_Functionality\Blocks\Defender;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 
 /**
  * Render Block

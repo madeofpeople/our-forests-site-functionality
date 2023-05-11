@@ -52,3 +52,31 @@ function register() {
 	);
 }
 add_action( 'init', __NAMESPACE__ . '\register' );
+
+/**
+ * Add Image Size
+ * 
+ * @link https://developer.wordpress.org/reference/functions/add_image_size/
+ *
+ * @return void
+ */
+function add_image_size() {
+	\add_image_size( 'defender', 600, 600, true );
+}
+add_action( 'after_setup_theme', __NAMESPACE__ . '\add_image_size' );
+
+/**
+ * Add Image Size to Media Picker
+ * 
+ * @link https://developer.wordpress.org/reference/functions/add_image_size/
+ *
+ * @param array $sizes
+ * @return array $sizes
+ */
+function add_image_size_to_picker( $sizes ) {
+    return array_merge( $sizes, array(
+        'defender' => __( 'Defender', 'site-functionality' ),
+    ) );
+}
+add_filter( 'image_size_names_choose', __NAMESPACE__ . '\add_image_size_to_picker' );
+

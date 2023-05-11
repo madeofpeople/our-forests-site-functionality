@@ -86,7 +86,7 @@ const TEMPLATE = [
 					[
 						'core/paragraph',
 						{
-							className: 'defender__profile-content',
+							className: 'defender__profile-bio content',
 							placeholder: __('Add bio...', 'site-functionality'),
 						}
 					]
@@ -120,7 +120,7 @@ const TEMPLATE = [
 					[
 						'core/paragraph',
 						{
-							className: 'defender__forest-content',
+							className: 'defender__forest-description content',
 							placeholder: __('Add forest description...', 'site-functionality'),
 						}
 					]
@@ -130,7 +130,7 @@ const TEMPLATE = [
 	]
 ];
 
-const ALLOWED_BLOCKS = ['core/group', 'core/heading', 'core/paragraph', 'core/social-links'];
+const ALLOWED_BLOCKS = ['core/group', 'core/heading', 'core/paragraph', 'core/image', 'core/social-links'];
 
 const Edit = (props) => {
 	const {

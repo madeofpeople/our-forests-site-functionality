@@ -17,7 +17,6 @@ import {
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { select, useSelect } from '@wordpress/data';
-import { external } from '@wordpress/icons';
 
 import { __ } from '@wordpress/i18n';
 
@@ -226,24 +225,11 @@ const Edit = (props) => {
 				type="url"
 				onChange={(instagram) => setAttributes({ instagram })}
 			/>
-			<div className='rich-text-group'>
-				<label className="rich-text-group__label" htmlFor="share-message">{__('Share Message', 'site-functionality')}</label>
-				<RichText
-					label={__('Share Message', 'site-functionality')}
-					tagName="div"
-					className='share-message rich-text-group__field'
-					id="share-message"
-					value={message}
-					allowedFormats={['core/bold', 'core/italic', 'core/link']}
-					onChange={(message) => setAttributes({ message })}
-					placeholder={__('Add share message...', 'site-functionality')}
-				/>
-			</div>
-			{/* <TextareaControl
+			<TextareaControl
 				label={__('Share Message', 'site-functionality')}
 				value={ message }
 				onChange={(message) => setAttributes({ message })}
-			/> */}
+			/>
 		</section>
 	);
 };

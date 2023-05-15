@@ -48,7 +48,7 @@ function render( $attributes, $content, $block ) {
 					'instagram'
 				);
 				foreach( $services as $service ) {
-					if( isset( $attributes[$service] ) ) {
+					if( isset( $attributes[$service] ) && !empty( $attributes[$service] ) ) {
 						$service_data = services( $service, $attributes );
 						?>
 

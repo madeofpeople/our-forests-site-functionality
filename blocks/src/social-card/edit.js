@@ -73,7 +73,7 @@ const Edit = (props) => {
 		className,
 	} = props;
 
-	const [ previewVisability, setPreviewVisability ] = useState( { previewVisability: true } );
+	const [ previewVisability, setPreviewVisability ] = useState( { previewVisability: false } );
 	const [ editVisability, setEditVisability ] = useState( { previewVisability: true } );
 
 	const setImageAttributes = (media) => {

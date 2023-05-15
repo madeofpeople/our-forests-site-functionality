@@ -12,11 +12,15 @@
         "social"
     ],
     "attributes": {
+        "title": {
+            "type": "string",
+            "default": "#OurForests #OurResponsibility"
+        },
         "message": {
             "type": "string",
             "default": ""
         },
-        "twitter": {
+        "link": {
             "type": "string",
             "default": ""
         },
@@ -24,7 +28,7 @@
             "type": "string",
             "default": ""
         },
-        "facebook": {
+        "twitter": {
             "type": "string",
             "default": ""
         },

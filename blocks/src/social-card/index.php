@@ -134,7 +134,7 @@ function enqueue() {
 		\wp_enqueue_style( $handle . '-theme' );
 	}
 }
-\add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue' );
+// \add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue' );
 
 /**
  * Returns the SVG for the Social Sharing Link.

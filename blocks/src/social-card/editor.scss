@@ -1,0 +1,44 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+ .wp-block-site-functionality-social-card {
+    background-color: var(--wp--preset--color--white);
+    padding: 1rem;
+
+    label {
+        margin-top: .25rem;
+    }
+
+    .rich-text {
+        font-size: 13px;
+        line-height: normal;
+        padding: 6px 8px;
+        margin-bottom: .5rem;
+        min-height: 4rem;
+
+        &-group {
+            &__label {
+                font-size: 11px;
+                font-weight: 500;
+                line-height: 1.4;
+                text-transform: uppercase;
+                display: inline-block;
+                margin-bottom: calc(8px);
+                padding: 0px;
+            }
+            &__field {}
+        }
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    .rich-text,
+    .components-text-control__input {
+        border: 1px solid var( --wp--preset--color--grey-mid );
+    }
+ }

@@ -2,43 +2,55 @@
     "apiVersion": 2,
     "version": "1.0.0",
     "textdomain": "site-functionality",
-    "name": "site-functionality/social-cards",
-    "title": "Social Cards",
+    "name": "site-functionality/social-card",
+    "title": "Social Card",
     "category": "media",
     "collection": "site-functionality",
-    "description": "Display social cards on page",
+    "description": "Display a social card on page",
     "keywords": [
         "share",
         "social"
     ],
     "attributes": {
-        "postsToShow": {
+        "message": {
+            "type": "string",
+            "default": ""
+        },
+        "twitter": {
+            "type": "string",
+            "default": ""
+        },
+        "instagram": {
+            "type": "string",
+            "default": ""
+        },
+        "facebook": {
+            "type": "string",
+            "default": ""
+        },
+        "id": {
             "type": "number",
-            "default": 24
+            "default": 0
         },
-        "postType": {
-			"type": "string",
-            "default": "social"
-		},
-		"postLayout": {
-			"type": "string",
-            "default": "grid"
+        "url": {
+            "type": "string",
+            "default": ""
         },
-        "columns": {
-			"type": "number",
-            "default": 4
+        "alt": {
+            "type": "string",
+            "default": ""
         },
         "className": {
             "type": "string",
-            "default": "tout"
+            "default": "social-card"
         }
     },
     "supports": {
-        "align": true,
+        "align": false,
         "anchor": true,
         "color": {
-            "background": true,
-            "text": true,
+            "background": false,
+            "text": false,
             "gradients": false,
             "link": false
         },
@@ -48,7 +60,7 @@
         "__experimentalStyle": false,
         "__experimentalBorder": false
     },
-    "example" : {
+    "example": {
         "attributes": {
             "className": "tout"
         },
@@ -85,5 +97,5 @@
     },
     "style": "file:../../build/style-index.css",
     "editorScript": "site-functionality",
-	"editorStyle": "file:../../build/index.css"
+    "editorStyle": "file:../../build/index.css"
 }

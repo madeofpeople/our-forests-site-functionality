@@ -47,20 +47,21 @@ function render( $attributes, $content, $block ) {
 					'facebook',
 					'instagram'
 				);
-				foreach( $services as $service ) :
-					if( isset( $attributes[$service] ) ) :
+				foreach( $services as $service ) {
+					if( isset( $attributes[$service] ) ) {
 						$service_data = services( $service, $attributes );
-						// var_dump( $service_data );
 						?>
-						<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo esc_attr( $service ); ?>">
+
+						<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $service ); ?>">
 							<a href="<?php echo esc_url( $service_data['url'] ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( $service_data['label'] ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor">
-							<?php echo wp_kses( $service_data['icon'], get_kses_svg_ruleset() ); ?>
+							<?php echo \wp_kses( $service_data['icon'], get_kses_svg_ruleset() ); ?>
 							<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( $service_data['label'] ); ?></span>
 							</a>
 						</li>
-						<?
-					endif;
-				endforeach;
+						
+						<?php
+					}
+				}
 				?>
 			</ul><!-- .wp-block-outermost-social-sharing -->
 		</div><!-- .share-actions -->

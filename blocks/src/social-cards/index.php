@@ -143,7 +143,7 @@ function enqueue() {
 		\wp_enqueue_style( $handle . '-theme' );
 	}
 }
-\add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue' );
+// \add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue' );
 
 /**
  * Renders the `outermost/social-sharing-link` block on server.

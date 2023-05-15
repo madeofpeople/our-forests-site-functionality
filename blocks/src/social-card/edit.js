@@ -17,7 +17,6 @@ import {
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { select, useSelect } from '@wordpress/data';
-import { external } from '@wordpress/icons';
 
 import { __ } from '@wordpress/i18n';
 
@@ -60,13 +59,14 @@ const ALLOWED_BLOCKS = ['core/paragraph', 'core/image', 'site-functionality/soci
 const Edit = (props) => {
 	const {
 		attributes: {
+			title,
 			message,
 			url,
 			id,
 			alt,
+			link,
 			twitter,
 			instagram,
-			facebook
 		},
 		isSelected,
 		setAttributes,
@@ -101,7 +101,7 @@ const Edit = (props) => {
 	}
 
 	const imageObj = select('core').getMedia(id);
-	const sizedImage = !!imageObj && (
+	const sizedImage = (
 		<img src={imageObj?.sizes?.medium?.url || url} height={imageObj?.sizes?.medium?.height || imageObj?.height} width={imageObj?.sizes?.medium?.width || imageObj?.width} />
 	);
 
@@ -133,7 +133,7 @@ const Edit = (props) => {
 			<li className={`outermost-social-sharing-link outermost-social-sharing-link-${service}`}>
 				<a 
 					className='wp-block-outermost-social-sharing-link-anchor' 
-					href={props.attributes[service]}
+					href='#'
 					data-vars-ga-category={__('Share Cards', 'site-functionality')}
 					aria-label={__('Share on ' + title, 'site-functionality')}
 				>
@@ -171,16 +171,9 @@ const Edit = (props) => {
 						</ul>
 						<div className="share-actions">
 							<ul className="wp-block-outermost-social-sharing is-style-logos-only">
-								{ twitter && (
-									renderService('twitter')
-								) }
-								{ facebook && (
-									renderService('facebook')
-								) }
-								{ instagram && (
-									renderService('instagram')
-								) }
-								
+								{ renderService('twitter') }
+								{ renderService('instagram') }
+								{ renderService('facebook') }
 							</ul>
 						</div>
 					</article>					
@@ -206,47 +199,37 @@ const Edit = (props) => {
 				handleUpload={true}
 			/>
 			<TextControl
-				label={ __('Twitter URL', 'site-functionality')}
-				value={twitter}
-				className='twitter-link'
-				placeholder={__('https://twitter.com/@user', 'site-functionality')}
-				type="url"
-				onChange={(twitter) => setAttributes({ twitter })}
+				label={ __('Title', 'site-functionality')}
+				desscription={ __('Email subject', 'site-functionality')}
+				value={title}
+				className='share-title'
+				placeholder={__('#OurResponsiblity. Pass it On', 'site-functionality')}
+				type="text"
+				onChange={(title) => setAttributes({ title })}
 			/>
 			<TextControl
-				label={ __('Facebook URL', 'site-functionality')}
-				value={facebook}
-				className='facebook-link'
-				placeholder={__('https://facebook.com/@user', 'site-functionality')}
+				label={ __('Link', 'site-functionality')}
+				desscription={ __('URL to add to share message', 'site-functionality')}
+				value={link}
+				className='share-link'
+				placeholder={__('https://sharelink.com', 'site-functionality')}
 				type="url"
-				onChange={(facebook) => setAttributes({ facebook })}
+				onChange={(link) => setAttributes({ link })}
 			/>
 			<TextControl
-				label={__('Instagram URL', 'site-functionality')}
+				label={__('Instagram Link', 'site-functionality')}
+				desscription={ __('Instagram link to send users to', 'site-functionality')}
 				value={instagram}
 				className='instagram-link'
 				placeholder={__('https://instagram.com/@user', 'site-functionality')}
 				type="url"
 				onChange={(instagram) => setAttributes({ instagram })}
 			/>
-			<div className='rich-text-group'>
-				<label className="rich-text-group__label" htmlFor="share-message">{__('Share Message', 'site-functionality')}</label>
-				<RichText
-					label={__('Share Message', 'site-functionality')}
-					tagName="div"
-					className='share-message rich-text-group__field'
-					id="share-message"
-					value={message}
-					allowedFormats={['core/bold', 'core/italic', 'core/link']}
-					onChange={(message) => setAttributes({ message })}
-					placeholder={__('Add share message...', 'site-functionality')}
-				/>
-			</div>
-			{/* <TextareaControl
+			<TextareaControl
 				label={__('Share Message', 'site-functionality')}
 				value={ message }
 				onChange={(message) => setAttributes({ message })}
-			/> */}
+			/>
 		</section>
 	);
 };

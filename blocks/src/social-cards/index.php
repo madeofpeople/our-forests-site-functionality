@@ -24,9 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function render( $attributes, $content, $block ) {
 	$output             = '';
-	$wrapper_attributes = \get_block_wrapper_attributes(
-		array()
-	);
 
 	$args  = array(
 		'post_type'      => Social::POST_TYPE['id'],

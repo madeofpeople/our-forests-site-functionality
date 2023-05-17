@@ -34,7 +34,7 @@ function render( $attributes, $content, $block ) {
 		<ul class="image-group">
 			<?php
 			if ( isset( $attributes['id'] ) ) :
-				echo \wp_get_attachment_image( $attributes['id'], array( 720, 720 ) );
+				echo \wp_get_attachment_image( $attributes['id'], 'social-medium' );
 			endif;
 			?>
 		</ul><!-- .image-group -->

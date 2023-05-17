@@ -7,7 +7,7 @@
     "category": "media",
     "collection": "site-functionality",
     "icon": "format-gallery",
-    "className": "wp-block-site-functionality-social-card-row",
+    "className": "wp-block-site-functionality-social-card",
     "description": "Display a row of social cards.",
     "keywords": [
         "social",
@@ -17,7 +17,7 @@
     "attributes": {
         "className": {
             "type": "text",
-            "default": "wp-block-site-functionality-social-card-row"
+            "default": "wp-block-site-functionality-social-card"
         }
     },
     "supports": {
@@ -32,7 +32,7 @@
         "customClassName": true,
         "defaultStylePicker": false,
         "__experimentalLayout": false,
-        "multiple": false
+        "multiple": true
     },
     "variations": [],
     "styles": [],

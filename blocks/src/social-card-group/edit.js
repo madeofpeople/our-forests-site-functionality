@@ -1,6 +1,7 @@
 import {
 	InnerBlocks,
 	useBlockProps,
+	useInnerBlocksProps
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -29,26 +30,26 @@ const TEMPLATE = [
 	]
 ];
 
-const ALLOWED_BLOCKS = [ 'site-functionality/social-card', 'core/group' ];
+const ALLOWED_BLOCKS = ['core/group', 'site-functionality/social-card'];
 
-const Edit = ( props ) => {
+const Edit = (props) => {
 	const {
 		attributes,
 		className,
 		setAttributes,
 	} = props;
 
-	const blockProps = useBlockProps( {
-		className: 'wp-block-site-functionality-social-card-row',
-	} );
+	const blockProps = useBlockProps( { className: 'wp-block-site-functionality-social-cards-row' } );
+    const innerBlocksProps = useInnerBlocksProps(
+        blockProps,
+        {
+            template: TEMPLATE,
+			allowedBlocks: ALLOWED_BLOCKS
+        }
+    );
 
 	return (
-		<div { ...blockProps }>
-			<InnerBlocks
-				allowedBlocks={ ALLOWED_BLOCKS }
-				template={ TEMPLATE }
-			/>
-		</div>
+		<section {...innerBlocksProps} />
 	);
 };
 

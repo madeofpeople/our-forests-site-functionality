@@ -156,13 +156,16 @@ function services( $service, $attributes ) {
 	$post_id   = $post->ID;
 	$thumbnail = $attributes['id'] ? \wp_get_attachment_image( $attributes['id'], 'medium' ) : '';
 
-	$permalink          = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_attachment_link( $attributes['id'] ) );
-	$post_title         = ( isset( $attributes['title'] ) && ! empty( $attributes['title'] ) ) ? $attributes['title'] : __( '#OurForests #OurResponsibility', 'site-functionality' );
-	$post_title_encoded = rawurlencode( $post_title );
-	$message            = isset( $attributes['message'] ) ? $attributes['message'] : '';
-	$message_encoded    = rawurlencode( $message );
-	$image              = rawurlencode( \esc_url( $thumbnail ) );
-	$separator          = '%20&mdash;%20';
+	$permalink               = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_attachment_link( $attributes['id'] ) );
+	$post_title              = ( isset( $attributes['title'] ) && ! empty( $attributes['title'] ) ) ? $attributes['title'] : __( '#OurForests #OurResponsibility', 'site-functionality' );
+	$post_title_encoded      = rawurlencode( $post_title );
+	$message                 = isset( $attributes['message'] ) ? $attributes['message'] : '';
+	$message_encoded         = rawurlencode( $message );
+	$image                   = $attributes['url'];
+	$image_encoded           = rawurlencode( $image );
+	$twitter_message         = sprintf( '%s - %s', $message, $image );
+	$twitter_message_encoded = rawurlencode( $twitter_message );
+	$separator               = '%20&mdash;%20';
 
 	$services_data = array(
 		'facebook'  => array(
@@ -172,7 +175,7 @@ function services( $service, $attributes ) {
 		),
 		'twitter'   => array(
 			'label' => __( 'Share on Twitter', 'site-functionality' ),
-			'url'   => \esc_url( 'https://twitter.com/intent/tweet?text=' . $message_encoded . '&url=' . $permalink ),
+			'url'   => \esc_url( 'https://twitter.com/intent/tweet?text=' . $twitter_message_encoded . '&url=' . $permalink ),
 			'icon'  => '<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M22.23,5.924c-0.736,0.326-1.527,0.547-2.357,0.646c0.847-0.508,1.498-1.312,1.804-2.27 c-0.793,0.47-1.671,0.812-2.606,0.996C18.324,4.498,17.257,4,16.077,4c-2.266,0-4.103,1.837-4.103,4.103 c0,0.322,0.036,0.635,0.106,0.935C8.67,8.867,5.647,7.234,3.623,4.751C3.27,5.357,3.067,6.062,3.067,6.814 c0,1.424,0.724,2.679,1.825,3.415c-0.673-0.021-1.305-0.206-1.859-0.513c0,0.017,0,0.034,0,0.052c0,1.988,1.414,3.647,3.292,4.023 c-0.344,0.094-0.707,0.144-1.081,0.144c-0.264,0-0.521-0.026-0.772-0.074c0.522,1.63,2.038,2.816,3.833,2.85 c-1.404,1.1-3.174,1.756-5.096,1.756c-0.331,0-0.658-0.019-0.979-0.057c1.816,1.164,3.973,1.843,6.29,1.843 c7.547,0,11.675-6.252,11.675-11.675c0-0.178-0.004-0.355-0.012-0.531C20.985,7.47,21.68,6.747,22.23,5.924z"></path></svg>',
 		),
 		'instagram' => array(
@@ -182,7 +185,7 @@ function services( $service, $attributes ) {
 		),
 		'download'  => array(
 			'label' => __( 'Download image', 'site-functionality' ),
-			'url'   => \wp_get_attachment_url( $attributes['id'], 'full' ),
+			'url'   => \esc_url( $image ),
 			'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2><path d="M18 11.3l-1-1.1-4 4V3h-1.5v11.3L7 10.2l-1 1.1 6.2 5.8 5.8-5.8zm.5 3.7v3.5h-13V15H4v5h16v-5h-1.5z" /></svg>',
 		),
 		'flipboard' => array(
@@ -207,7 +210,7 @@ function services( $service, $attributes ) {
 		),
 		'pinterest' => array(
 			'label' => __( 'Share on Pinterest', 'site-functionality' ),
-			'url'   => \esc_url( 'https://pinterest.com/pin/create/button/?&url=' . $permalink . '&description=' . $message_encoded . '&media=' . $image ),
+			'url'   => \esc_url( 'https://pinterest.com/pin/create/button/?&url=' . $permalink . '&description=' . $message_encoded . '&media=' . $image_encoded ),
 			'icon'  => '<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M12.289,2C6.617,2,3.606,5.648,3.606,9.622c0,1.846,1.025,4.146,2.666,4.878c0.25,0.111,0.381,0.063,0.439-0.169 c0.044-0.175,0.267-1.029,0.365-1.428c0.032-0.128,0.017-0.237-0.091-0.362C6.445,11.911,6.01,10.75,6.01,9.668 c0-2.777,2.194-5.464,5.933-5.464c3.23,0,5.49,2.108,5.49,5.122c0,3.407-1.794,5.768-4.13,5.768c-1.291,0-2.257-1.021-1.948-2.277 c0.372-1.495,1.089-3.112,1.089-4.191c0-0.967-0.542-1.775-1.663-1.775c-1.319,0-2.379,1.309-2.379,3.059 c0,1.115,0.394,1.869,0.394,1.869s-1.302,5.279-1.54,6.261c-0.405,1.666,0.053,4.368,0.094,4.604 c0.021,0.126,0.167,0.169,0.25,0.063c0.129-0.165,1.699-2.419,2.142-4.051c0.158-0.59,0.817-2.995,0.817-2.995 c0.43,0.784,1.681,1.446,3.013,1.446c3.963,0,6.822-3.494,6.822-7.833C20.394,5.112,16.849,2,12.289,2"></path></svg>',
 		),
 		'pocket'    => array(

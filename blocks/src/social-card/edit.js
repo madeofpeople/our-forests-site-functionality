@@ -102,7 +102,7 @@ const Edit = (props) => {
 
 	const imageObj = select('core').getMedia(id);
 	const sizedImage = (
-		<img src={imageObj?.sizes?.medium?.url || url} height={imageObj?.sizes?.medium?.height || imageObj?.height} width={imageObj?.sizes?.medium?.width || imageObj?.width} />
+		<img src={imageObj?.sizes?.['social-medium']?.url || imageObj?.sizes?.['social-large']?.url || url} height={imageObj?.sizes?.['social-medium']?.height || imageObj?.sizes?.['social-large']?.height || imageObj?.height} width={imageObj?.sizes?.['social-medium']?.width || imageObj?.sizes?.['social-large']?.width || imageObj?.width} />
 	);
 
 	const image = !!url && (

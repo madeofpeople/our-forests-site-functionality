@@ -4,15 +4,17 @@ import { __ } from '@wordpress/i18n';
 import * as defender from './defender';
 import * as pageNav from './page-nav';
 import * as linkGroup from './link-group';
-import * as socialCards from './social-cards';
+// import * as socialCards from './social-cards';
 import * as socialCard from './social-card';
+import * as socialCardGroup from './social-card-group';
 
 const blocks = [
 	defender,
 	pageNav,
 	linkGroup,
-	socialCards,
-	socialCard
+	// socialCards,
+	socialCard,
+	socialCardGroup
 ];
 
 /**

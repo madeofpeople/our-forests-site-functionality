@@ -102,29 +102,11 @@ const Edit = (props) => {
 
 	const imageObj = select('core').getMedia(id);
 	const sizedImage = (
-		<img src={imageObj?.sizes?.medium?.url || url} height={imageObj?.sizes?.medium?.height || imageObj?.height} width={imageObj?.sizes?.medium?.width || imageObj?.width} />
+		<img src={imageObj?.sizes?.['social-medium']?.url || imageObj?.sizes?.['social-large']?.url || url} height={imageObj?.sizes?.['social-medium']?.height || imageObj?.sizes?.['social-large']?.height || imageObj?.height} width={imageObj?.sizes?.['social-medium']?.width || imageObj?.sizes?.['social-large']?.width || imageObj?.width} />
 	);
 
 	const image = !!url && (
 		<img src={url} alt={alt} />
-	);
-
-	const previewVisabilityButton = !!previewVisability ? (
-		<Button
-				variant="link"
-				icon="hidden"
-				onClick={ onSetPreviewVisability }
-			>
-				{ __('Hide Preview', 'site-functionality') }
-			</Button>
-		) : (
-			<Button
-					variant="link"
-					icon="visibility"
-					onClick={ onSetPreviewVisability }
-				>
-					{ __('Show Preview', 'site-functionality') }
-			</Button>
 	);
 
 	const renderService = ( service ) => {
@@ -159,30 +141,44 @@ const Edit = (props) => {
 		}
 	);
 
-	return (
-		<section {...blockProps}>
-			{previewVisabilityButton}
-			
-			{
-				previewVisability && (
-					<article  {...innerBlocksProps}>
-						<ul className="image-group">
-							{sizedImage}
-						</ul>
-						<div className="share-actions">
-							<ul className="wp-block-outermost-social-sharing is-style-logos-only">
-								{ renderService('twitter') }
-								{ instagram && (
-									renderService('instagram')
-								) }
-								{ renderService('facebook') }
-								{ renderService('download') }
-							</ul>
-						</div>
-					</article>					
-				)
-			}
+	const previewVisabilityButton = !!previewVisability ? (
+		<Button
+				variant="link"
+				icon="hidden"
+				onClick={ onSetPreviewVisability }
+			>
+				{ __('Hide Preview', 'site-functionality') }
+			</Button>
+		) : (
+			<Button
+					variant="link"
+					icon="visibility"
+					onClick={ onSetPreviewVisability }
+				>
+					{ __('Show Preview', 'site-functionality') }
+			</Button>
+	);
 
+	const blockPreview = (
+		<article  {...innerBlocksProps}>
+			<ul className="image-group">
+				{sizedImage}
+			</ul>
+			<div className="share-actions">
+				<ul className="wp-block-outermost-social-sharing is-style-logos-only">
+					{ renderService('twitter') }
+					{ instagram && (
+						renderService('instagram')
+					) }
+					{ renderService('facebook') }
+					{ renderService('download') }
+				</ul>
+			</div>
+		</article>	
+	);
+
+	return (
+		<article {...blockProps}>
 			<BlockControls>
 				<MediaReplaceFlow
 					mediaId={id}
@@ -233,7 +229,7 @@ const Edit = (props) => {
 				value={ message }
 				onChange={(message) => setAttributes({ message })}
 			/>
-		</section>
+		</article>
 	);
 };
 

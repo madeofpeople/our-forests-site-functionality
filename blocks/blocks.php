@@ -10,9 +10,9 @@ namespace SiteFunctionality\Blocks;
 include_once \plugin_dir_path( __FILE__ ) . 'src/defender/index.php';
 include_once \plugin_dir_path( __FILE__ ) . 'src/page-nav/index.php';
 include_once \plugin_dir_path( __FILE__ ) . 'src/link-group/index.php';
-include_once \plugin_dir_path( __FILE__ ) . 'src/social-cards/index.php';
+// include_once \plugin_dir_path( __FILE__ ) . 'src/social-cards/index.php';
 include_once \plugin_dir_path( __FILE__ ) . 'src/social-card/index.php';
-
+include_once \plugin_dir_path( __FILE__ ) . 'src/social-card-group/index.php';
 
 const TEMPLATE_PARAMS = array(
 	'filter_prefix'             => 'site_functionality',

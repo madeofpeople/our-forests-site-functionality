@@ -156,8 +156,8 @@ function services( $service, $attributes ) {
 	$post_id   = $post->ID;
 	$thumbnail = $attributes['id'] ? \wp_get_attachment_image( $attributes['id'], 'medium' ) : '';
 
-	$permalink          = ( isset( $attributes[ 'link' ] ) && !empty( $attributes[ 'link' ] ) ) ? rawurlencode( $attributes[ 'link' ] ) : rawurlencode( \get_attachment_link( $attributes['id'] ) );
-	$post_title         = ( isset( $attributes[ 'title' ] ) && !empty( $attributes[ 'title' ] ) ) ? $attributes[ 'title' ] : __( '#OurForests #OurResponsibility', 'site-functionality' );
+	$permalink          = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_attachment_link( $attributes['id'] ) );
+	$post_title         = ( isset( $attributes['title'] ) && ! empty( $attributes['title'] ) ) ? $attributes['title'] : __( '#OurForests #OurResponsibility', 'site-functionality' );
 	$post_title_encoded = rawurlencode( $post_title );
 	$message            = isset( $attributes['message'] ) ? $attributes['message'] : '';
 	$message_encoded    = rawurlencode( $message );
@@ -183,7 +183,7 @@ function services( $service, $attributes ) {
 		'download'  => array(
 			'label' => __( 'Download image', 'site-functionality' ),
 			'url'   => \wp_get_attachment_url( $attributes['id'], 'full' ),
-			'icon'  => '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M3.202 2.604h41.747v39.559H3.202z" transform="matrix(.57489 0 0 .6067 -1.841 -1.58)"/><path d="M11 40c-.8 0-1.5-.3-2.1-.9-.6-.6-.9-1.3-.9-2.1v-7.15h3V37h26v-7.15h3V37c0 .8-.3 1.5-.9 2.1-.6.6-1.3.9-2.1.9H11Zm13-7.65-9.65-9.65 2.15-2.15 6 6V8h3v18.55l6-6 2.15 2.15L24 32.35Z" style="fill-rule:nonzero" transform="matrix(.625 0 0 .625 -3 -3)"/></svg>',
+			'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2><path d="M18 11.3l-1-1.1-4 4V3h-1.5v11.3L7 10.2l-1 1.1 6.2 5.8 5.8-5.8zm.5 3.7v3.5h-13V15H4v5h16v-5h-1.5z" /></svg>',
 		),
 		'flipboard' => array(
 			'label' => __( 'Share on Flipboard', 'site-functionality' ),
@@ -212,7 +212,7 @@ function services( $service, $attributes ) {
 		),
 		'pocket'    => array(
 			'label' => __( 'Share on Pocket', 'site-functionality' ),
-			'url'   => \esc_url(  'https://getpocket.com/save/?url=' . $permalink . '&title=' . $message_encoded ),
+			'url'   => \esc_url( 'https://getpocket.com/save/?url=' . $permalink . '&title=' . $message_encoded ),
 			'icon'  => '<svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M21.927,4.194C21.667,3.48,20.982,3,20.222,3h-0.01h-1.721H3.839C3.092,3,2.411,3.47,2.145,4.17 C2.066,4.378,2.026,4.594,2.026,4.814v6.035l0.069,1.2c0.29,2.73,1.707,5.115,3.899,6.778c0.039,0.03,0.079,0.059,0.119,0.089 l0.025,0.018c1.175,0.859,2.491,1.441,3.91,1.727c0.655,0.132,1.325,0.2,1.991,0.2c0.615,0,1.232-0.057,1.839-0.17 c0.073-0.014,0.145-0.028,0.219-0.044c0.02-0.004,0.042-0.012,0.064-0.023c1.359-0.297,2.621-0.864,3.753-1.691l0.025-0.018 c0.04-0.029,0.08-0.058,0.119-0.089c2.192-1.664,3.609-4.049,3.898-6.778l0.069-1.2V4.814C22.026,4.605,22,4.398,21.927,4.194z M17.692,10.481l-4.704,4.512c-0.266,0.254-0.608,0.382-0.949,0.382c-0.342,0-0.684-0.128-0.949-0.382l-4.705-4.512 C5.838,9.957,5.82,9.089,6.344,8.542c0.524-0.547,1.392-0.565,1.939-0.04l3.756,3.601l3.755-3.601 c0.547-0.524,1.415-0.506,1.939,0.04C18.256,9.089,18.238,9.956,17.692,10.481z"></path></svg>',
 		),
 		'print'     => array(
@@ -274,7 +274,7 @@ function services( $service, $attributes ) {
  */
 function get_icon( $service, $attributes ) {
 	$services = services( $service, $attributes );
-	return \wp_kses( $services['icon'] , get_kses_svg_ruleset() );
+	return \wp_kses( $services['icon'], get_kses_svg_ruleset() );
 }
 
 /**
@@ -319,12 +319,16 @@ function get_kses_svg_ruleset() {
 			'width'           => true,
 			'height'          => true,
 			'viewbox'         => true, // <= Must be lower case!
+			'focusable'       => true,
+			'style'           => true,
+			'fill'            => true,
 		),
 		'g'     => array( 'fill' => true ),
 		'title' => array( 'title' => true ),
 		'path'  => array(
-			'd'    => true,
-			'fill' => true,
+			'd'     => true,
+			'fill'  => true,
+			'style' => true,
 		),
 	);
 	return array_merge( $kses_defaults, $svg_args );

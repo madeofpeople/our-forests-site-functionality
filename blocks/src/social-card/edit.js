@@ -226,7 +226,7 @@ const Edit = (props) => {
 				onChange={(instagram) => setAttributes({ instagram })}
 			/>
 			<TextareaControl
-				label={__('Share Message', 'site-functionality')}
+				label={__('Twitter Share Message', 'site-functionality')}
 				value={ message }
 				onChange={(message) => setAttributes({ message })}
 			/>

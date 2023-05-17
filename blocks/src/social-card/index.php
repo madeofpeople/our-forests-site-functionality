@@ -46,7 +46,6 @@ function render( $attributes, $content, $block ) {
 					'twitter',
 					'facebook',
 					'instagram',
-					'mail'
 				);
 				foreach ( $services as $service ) {
 					if ( 'instagram' === $service && empty( $attributes['instagram'] ) ) {

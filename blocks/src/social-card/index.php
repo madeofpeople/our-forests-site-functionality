@@ -183,7 +183,7 @@ function services( $service, $attributes ) {
 		'download'  => array(
 			'label' => __( 'Download image', 'site-functionality' ),
 			'url'   => \wp_get_attachment_url( $attributes['id'], 'full' ),
-			'icon'  => '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path style="fill:none" d="M3.202 2.604h41.747v39.559H3.202z" transform="matrix(.57489 0 0 .6067 -1.841 -1.58)"/><path d="M11 40c-.8 0-1.5-.3-2.1-.9-.6-.6-.9-1.3-.9-2.1v-7.15h3V37h26v-7.15h3V37c0 .8-.3 1.5-.9 2.1-.6.6-1.3.9-2.1.9H11Zm13-7.65-9.65-9.65 2.15-2.15 6 6V8h3v18.55l6-6 2.15 2.15L24 32.35Z" style="fill-rule:nonzero" transform="matrix(.625 0 0 .625 -3 -3)"/></svg>',
+			'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2><path d="M18 11.3l-1-1.1-4 4V3h-1.5v11.3L7 10.2l-1 1.1 6.2 5.8 5.8-5.8zm.5 3.7v3.5h-13V15H4v5h16v-5h-1.5z" /></svg>',
 		),
 		'flipboard' => array(
 			'label' => __( 'Share on Flipboard', 'site-functionality' ),
@@ -319,12 +319,16 @@ function get_kses_svg_ruleset() {
 			'width'           => true,
 			'height'          => true,
 			'viewbox'         => true, // <= Must be lower case!
+			'focusable'       => true,
+			'style'           => true,
+			'fill'            => true,
 		),
 		'g'     => array( 'fill' => true ),
 		'title' => array( 'title' => true ),
 		'path'  => array(
-			'd'    => true,
-			'fill' => true,
+			'd'     => true,
+			'fill'  => true,
+			'style' => true,
 		),
 	);
 	return array_merge( $kses_defaults, $svg_args );

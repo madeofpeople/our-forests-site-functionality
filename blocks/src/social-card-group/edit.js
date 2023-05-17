@@ -30,9 +30,9 @@ const TEMPLATE = [
 	]
 ];
 
-const ALLOWED_BLOCKS = [ 'site-functionality/social-card', 'core/group' ];
+const ALLOWED_BLOCKS = ['core/group', 'site-functionality/social-card'];
 
-const Edit = ( props ) => {
+const Edit = (props) => {
 	const {
 		attributes,
 		className,

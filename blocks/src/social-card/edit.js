@@ -172,8 +172,11 @@ const Edit = (props) => {
 						<div className="share-actions">
 							<ul className="wp-block-outermost-social-sharing is-style-logos-only">
 								{ renderService('twitter') }
-								{ renderService('instagram') }
+								{ instagram && (
+									renderService('instagram')
+								) }
 								{ renderService('facebook') }
+								{ renderService('download') }
 							</ul>
 						</div>
 					</article>					
@@ -226,7 +229,7 @@ const Edit = (props) => {
 				onChange={(instagram) => setAttributes({ instagram })}
 			/>
 			<TextareaControl
-				label={__('Share Message', 'site-functionality')}
+				label={__('Twitter Share Message', 'site-functionality')}
 				value={ message }
 				onChange={(message) => setAttributes({ message })}
 			/>

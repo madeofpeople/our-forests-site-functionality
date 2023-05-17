@@ -12,13 +12,21 @@
         "social"
     ],
     "attributes": {
+        "id": {
+            "type": "number",
+            "default": 0
+        },
+        "url": {
+            "type": "string",
+            "default": ""
+        },
+        "alt": {
+            "type": "string",
+            "default": ""
+        },
         "title": {
             "type": "string",
             "default": "#OurForests #OurResponsibility"
-        },
-        "message": {
-            "type": "string",
-            "default": ""
         },
         "link": {
             "type": "string",
@@ -32,15 +40,19 @@
             "type": "string",
             "default": ""
         },
-        "id": {
-            "type": "number",
-            "default": 0
-        },
-        "url": {
+        "message": {
             "type": "string",
             "default": ""
         },
-        "alt": {
+        "hashtags": {
+            "type": "string",
+            "default": ""
+        },
+        "via": {
+            "type": "string",
+            "default": ""
+        },
+        "related": {
             "type": "string",
             "default": ""
         },

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function render( $attributes, $content, $block ) {
 	$args = array();
 	if ( array_key_exists( 'id', $attributes ) && $attributes['id'] > 0 ) {
-		$args['style'] = sprintf( 'background-image: url(%s);', \wp_get_attachment_image_url( (int) $attributes['id'], 'full' ) );
+		$args['style'] = sprintf( 'background-image: url(%s);', \wp_get_attachment_image_url( (int) $attributes['id'], 'defenderbg-large' ) );
 	}
 	$tag_name           = ( isset( $attributes['tagName'] ) ) ? $attributes['tagName'] : 'article';
 	$wrapper_attributes = \get_block_wrapper_attributes( $args );

@@ -24,6 +24,10 @@
             "type": "string",
             "default": ""
         },
+        "size": {
+            "type": "string",
+            "default": "social-thumbnail"
+        },
         "title": {
             "type": "string",
             "default": "#OurForests #OurResponsibility"

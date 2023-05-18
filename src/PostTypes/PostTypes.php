@@ -35,9 +35,9 @@ class PostTypes extends Base {
 	 * @return void
 	 */
 	public function init() {
-		new Press( $this->version, $this->plugin_name );
-		new Review( $this->version, $this->plugin_name );
-		new Social( $this->version, $this->plugin_name );
+		// new Press( $this->version, $this->plugin_name );
+		// new Review( $this->version, $this->plugin_name );
+		// new Social( $this->version, $this->plugin_name );
 
 		\add_filter( 'page-links-to-post-types', array( $this, 'external_links' ) );
 	}

@@ -44,21 +44,9 @@ const TEMPLATE = [
 						}
 					],
 					[
-						'core/heading',
+						'core/group',
 						{
-							className: 'defender__profile-title',
-							placeholder: __('Add Name...', 'site-functionality'),
-							level: 3
-						}
-					],
-					[
-						'core/social-links',
-						{
-							className: 'is-style-logos-only defender__social-links',
-							iconColor: 'green-dark',
-							openInNewTab: true,
-							showLabels: true,
-							size: 'has-normal-icon-size',
+							className: 'profile__wrapper',
 							layout: {
 								type: 'flex',
 								orientation: 'vertical'
@@ -66,29 +54,53 @@ const TEMPLATE = [
 						},
 						[
 							[
-								'core/social-link',
+								'core/heading',
 								{
-									url: 'https://instagram.com/username',
-									service: 'instagram',
-									label: 'username'
+									className: 'defender__profile-title',
+									placeholder: __('Add Name...', 'site-functionality'),
+									level: 3
 								}
 							],
 							[
-								'core/social-link',
+								'core/social-links',
 								{
-									url: 'https://twitter.com/handle',
-									service: 'twitter',
-									label: 'handle'
+									className: 'is-style-logos-only defender__social-links',
+									iconColor: 'green-dark',
+									openInNewTab: true,
+									showLabels: true,
+									size: 'has-normal-icon-size',
+									layout: {
+										type: 'flex',
+										orientation: 'vertical'
+									}
+								},
+								[
+									[
+										'core/social-link',
+										{
+											url: 'https://instagram.com/username',
+											service: 'instagram',
+											label: 'username'
+										}
+									],
+									[
+										'core/social-link',
+										{
+											url: 'https://twitter.com/handle',
+											service: 'twitter',
+											label: 'handle'
+										}
+									]
+								]
+							],
+							[
+								'core/paragraph',
+								{
+									className: 'defender__profile-bio content',
+									placeholder: __('Add bio...', 'site-functionality'),
 								}
 							]
 						]
-					],
-					[
-						'core/paragraph',
-						{
-							className: 'defender__profile-bio content',
-							placeholder: __('Add bio...', 'site-functionality'),
-						}
 					]
 				]
 			],
@@ -173,7 +185,7 @@ const Edit = (props) => {
 	);
 
 	const bgStyle = { backgroundImage: url ? `url(${url})` : undefined }
-	
+
 	const blockProps = useBlockProps({
 		className: classNames(className, 'defender'),
 		style: bgStyle

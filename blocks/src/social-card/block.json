@@ -26,7 +26,7 @@
         },
         "size": {
             "type": "string",
-            "default": "social-thumbnail"
+            "default": "social-medium"
         },
         "title": {
             "type": "string",

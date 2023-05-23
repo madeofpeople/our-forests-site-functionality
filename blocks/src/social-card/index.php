@@ -25,20 +25,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 function render( $attributes, $content, $block ) {
 	$args               = array();
 	$wrapper_attributes = \get_block_wrapper_attributes( $args );
-	$attributes['size'] = isset( $attributes['size'] ) ? $attributes['size'] : 'social-thumbnail';
+	$attributes['size'] = 'social-medium';
 
 	ob_start();
 	?>
 
 	<article class="social-post">
 
-		<ul class="image-group">
+		<div class="image-group">
 			<?php
 			if ( isset( $attributes['id'] ) ) :
 				echo \wp_get_attachment_image( $attributes['id'], $attributes['size'] );
 			endif;
 			?>
-		</ul><!-- .image-group -->
+		</div><!-- .image-group -->
 
 		<div class="share-actions">
 			<ul class="wp-block-outermost-social-sharing is-style-logos-only">

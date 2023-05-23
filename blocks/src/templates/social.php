@@ -47,7 +47,7 @@ if ( ! empty( $images ) ) :
                     <?php
                 else :
                     ?>
-					<?php echo \wp_get_attachment_image( $image_id, 'full' ); ?>
+					<?php echo \wp_get_attachment_image( $image_id, 'social-medium' ); ?>
                     <?php
                 endif;
                 ?>

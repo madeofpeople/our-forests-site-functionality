@@ -1,5 +1,5 @@
 import {
-	InnerBlocks,
+	InspectorControls,
 	BlockControls,
 	MediaPlaceholder,
 	MediaReplaceFlow,
@@ -7,9 +7,9 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
-
 import {
 	Button,
+	PanelBody,
 	Placeholder,
 	SelectControl,
 	TextareaControl,
@@ -66,6 +66,7 @@ const Edit = (props) => {
 			alt,
 			link,
 			size,
+			sizes,
 			twitter,
 			instagram,
 		},
@@ -74,36 +75,33 @@ const Edit = (props) => {
 		className,
 	} = props;
 
-	const [ previewVisability, setPreviewVisability ] = useState( { previewVisability: false } );
-	const [ editVisability, setEditVisability ] = useState( { previewVisability: true } );
-
 	const setImageAttributes = (media) => {
-		if (!media || !media.url) {
+		if (!media || !media.id) {
 			setAttributes({
-				url: null,
 				id: null,
+				url: null,
 				alt: null,
+				sizes: []
 			});
 			return;
 		}
 		setAttributes({
-			url: media.url,
 			id: media.id,
+			url: media.url,
 			alt: media?.alt,
+			sizes: media?.sizes
 		});
+
+		console.log( media );
 	};
-
-	const onSetPreviewVisability = () => {
-		setPreviewVisability( !previewVisability );
-	}
-
-	const onSetEditVisability = () => {
-		setEditVisability( !editVisability );
-	}
 
 	const imageObj = select('core').getMedia(id);
 	const sizedImage = (
-		<img src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.['social-medium']?.url || url} height={imageObj?.sizes?.[size]?.height || imageObj?.sizes?.['social-medium']?.height || imageObj?.height} width={imageObj?.sizes?.[size]?.width || imageObj?.sizes?.['social-medium']?.width || imageObj?.width} />
+		<img 
+			src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.[size]?.url || url} 
+			height={imageObj?.sizes?.[size]?.height || imageObj?.sizes?.[size]?.height || imageObj?.height} 
+			width={imageObj?.sizes?.[size]?.width || imageObj?.sizes?.[size]?.width || imageObj?.width} 
+		/>
 	);
 
 	const image = !!url && (
@@ -142,25 +140,7 @@ const Edit = (props) => {
 		}
 	);
 
-	const previewVisabilityButton = !!previewVisability ? (
-		<Button
-				variant="link"
-				icon="hidden"
-				onClick={ onSetPreviewVisability }
-			>
-				{ __('Hide Preview', 'site-functionality') }
-			</Button>
-		) : (
-			<Button
-					variant="link"
-					icon="visibility"
-					onClick={ onSetPreviewVisability }
-				>
-					{ __('Show Preview', 'site-functionality') }
-			</Button>
-	);
-
-	const blockPreview = (
+	const blockPreview = !! id ?(
 		<article  {...innerBlocksProps}>
 			<ul className="image-group">
 				{sizedImage}
@@ -176,20 +156,8 @@ const Edit = (props) => {
 				</ul>
 			</div>
 		</article>	
-	);
-
-	return (
-		<article {...blockProps}>
-			<BlockControls>
-				<MediaReplaceFlow
-					mediaId={id}
-					mediaURL={url}
-					allowedTypes={ALLOWED_MEDIA_TYPES}
-					accept="image/*"
-					onSelect={setImageAttributes}
-					name={!url ? __('Add Image', 'site-functionality') : __('Replace Image', 'site-functionality')}
-				/>
-			</BlockControls>
+	) : (
+		<article  {...innerBlocksProps}>
 			<MediaPlaceholder
 				accept="image/*"
 				allowedTypes={ALLOWED_MEDIA_TYPES}
@@ -197,39 +165,75 @@ const Edit = (props) => {
 				mediaPreview={sizedImage}
 				multiple={false}
 				handleUpload={true}
+				labels = { { 
+					title: __( 'Select Image', 'site-functionality' ),
+					instructions: __( 'Update block settings in right panel', 'site-functionality' )
+
+				} }
 			/>
-			<TextControl
-				label={ __('Title', 'site-functionality')}
-				desscription={ __('Email subject', 'site-functionality')}
-				value={title}
-				className='share-title'
-				placeholder={__('#OurResponsiblity. Pass it On', 'site-functionality')}
-				type="text"
-				onChange={(title) => setAttributes({ title })}
-			/>
-			<TextControl
-				label={ __('Link', 'site-functionality')}
-				desscription={ __('URL to add to share message', 'site-functionality')}
-				value={link}
-				className='share-link'
-				placeholder={__('https://sharelink.com', 'site-functionality')}
-				type="url"
-				onChange={(link) => setAttributes({ link })}
-			/>
-			<TextControl
-				label={__('Instagram Link', 'site-functionality')}
-				desscription={ __('Instagram link to send users to', 'site-functionality')}
-				value={instagram}
-				className='instagram-link'
-				placeholder={__('https://instagram.com/@user', 'site-functionality')}
-				type="url"
-				onChange={(instagram) => setAttributes({ instagram })}
-			/>
-			<TextareaControl
-				label={__('Twitter Share Message', 'site-functionality')}
-				value={ message }
-				onChange={(message) => setAttributes({ message })}
-			/>
+		</article>
+	);
+
+	return (
+		<article {...blockProps}>
+			<InspectorControls>
+				<PanelBody
+					title={__('Block Settings', 'site-functionality')}
+					initialOpen={true}
+				>
+				<MediaPlaceholder
+					accept="image/*"
+					allowedTypes={ALLOWED_MEDIA_TYPES}
+					onSelect={setImageAttributes}
+					mediaPreview={sizedImage}
+					multiple={false}
+					handleUpload={true}
+				/>
+				<TextControl
+					label={ __('Title', 'site-functionality')}
+					desscription={ __('Email subject', 'site-functionality')}
+					value={title}
+					className='share-title'
+					placeholder={__('#OurResponsiblity. Pass it On', 'site-functionality')}
+					type="text"
+					onChange={(title) => setAttributes({ title })}
+				/>
+				<TextControl
+					label={ __('Link', 'site-functionality')}
+					desscription={ __('URL to add to share message', 'site-functionality')}
+					value={link}
+					className='share-link'
+					placeholder={__('https://sharelink.com', 'site-functionality')}
+					type="url"
+					onChange={(link) => setAttributes({ link })}
+				/>
+				<TextControl
+					label={__('Instagram Link', 'site-functionality')}
+					desscription={ __('Instagram link to send users to', 'site-functionality')}
+					value={instagram}
+					className='instagram-link'
+					placeholder={__('https://instagram.com/@user', 'site-functionality')}
+					type="url"
+					onChange={(instagram) => setAttributes({ instagram })}
+				/>
+				<TextareaControl
+					label={__('Twitter Share Message', 'site-functionality')}
+					value={ message }
+					onChange={(message) => setAttributes({ message })}
+				/>
+				</PanelBody>
+			</InspectorControls>
+			<BlockControls>
+				<MediaReplaceFlow
+					mediaId={id}
+					mediaURL={url}
+					allowedTypes={ALLOWED_MEDIA_TYPES}
+					accept="image/*"
+					onSelect={setImageAttributes}
+					name={!id ? __('Add Image', 'site-functionality') : __('Replace Image', 'site-functionality')}
+				/>
+			</BlockControls>
+			{ blockPreview }
 		</article>
 	);
 };

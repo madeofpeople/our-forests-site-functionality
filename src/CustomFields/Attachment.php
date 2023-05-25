@@ -41,7 +41,7 @@ class Attachment extends Base {
 	 * @return void
 	 */
 	public function register_fields() {
-		\acf_add_local_field_group(
+		acf_add_local_field_group(
 			array(
 				'key'                   => 'group_media_details',
 				'title'                 => __( 'Media Details', 'site-functionality' ),
@@ -52,7 +52,7 @@ class Attachment extends Base {
 						'name'              => 'intro_text',
 						'aria-label'        => '',
 						'type'              => 'wysiwyg',
-						'instructions'      => '',
+						'instructions'      => __( 'Text that will appear above Social posts.', 'site-functionality' ),
 						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => array(
@@ -67,20 +67,44 @@ class Attachment extends Base {
 						'media_upload'      => 0,
 						'delay'             => 0,
 					),
+					array(
+						'key'                => 'field_categories',
+						'label'              => __( 'Display For', 'site-functionality' ),
+						'name'               => 'categories',
+						'aria-label'         => '',
+						'type'               => 'taxonomy',
+						'instructions'       => __( 'Select Media Categories on which Intro Text should be displayed.', 'site-functionality' ),
+						'required'           => 0,
+						'conditional_logic'  => 0,
+						'wrapper'            => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'acfe_save_meta'     => 0,
+						'taxonomy'           => 'media_category',
+						'add_term'           => 1,
+						'save_terms'         => 0,
+						'load_terms'         => 0,
+						'return_format'      => 'id',
+						'field_type'         => 'checkbox',
+						'multiple'           => 0,
+						'allow_null'         => 1,
+					),
 				),
 				'location'              => array(
 					array(
 						array(
-							'param'    => 'attachment',
+							'param'    => 'options_page',
 							'operator' => '==',
-							'value'    => 'image',
+							'value'    => 'media-settings',
 						),
 					),
 				),
 				'menu_order'            => 0,
 				'position'              => 'normal',
-				'style'                 => 'default',
-				'label_placement'       => 'left',
+				'style'                 => 'seamless',
+				'label_placement'       => 'top',
 				'instruction_placement' => 'label',
 				'hide_on_screen'        => '',
 				'active'                => true,

@@ -13,6 +13,7 @@ return array(
     'SiteFunctionality\\Admin\\Admin' => $baseDir . '/src/Admin/Admin.php',
     'SiteFunctionality\\Admin\\Options' => $baseDir . '/src/Admin/Options.php',
     'SiteFunctionality\\Api\\RestApi' => $baseDir . '/src/Api/RestApi.php',
+    'SiteFunctionality\\CustomFields\\Attachment' => $baseDir . '/src/CustomFields/Attachment.php',
     'SiteFunctionality\\CustomFields\\CustomFields' => $baseDir . '/src/CustomFields/CustomFields.php',
     'SiteFunctionality\\PostTypes\\PostTypes' => $baseDir . '/src/PostTypes/PostTypes.php',
     'SiteFunctionality\\PostTypes\\Press' => $baseDir . '/src/PostTypes/Press.php',

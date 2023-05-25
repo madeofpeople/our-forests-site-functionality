@@ -8,6 +8,7 @@
 namespace SiteFunctionality\CustomFields;
 
 use SiteFunctionality\Abstracts\Base;
+use SiteFunctionality\CustomFields\Attachment;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -39,6 +40,7 @@ class CustomFields extends Base {
 	public function init() {
 		\add_action( 'acf/init', array( $this, 'acf_settings' ) );
 		\add_action( 'acfe/init', array( $this, 'acfe_settings' ) );
+		new Attachment( $this->version, $this->plugin_name );
 	}
 
 	/**

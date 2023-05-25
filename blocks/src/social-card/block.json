@@ -28,6 +28,10 @@
             "type": "string",
             "default": "social-medium"
         },
+        "sizes": {
+            "type": "array",
+            "default": []
+        },
         "title": {
             "type": "string",
             "default": "#OurForests #OurResponsibility"

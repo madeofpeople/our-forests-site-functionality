@@ -32,6 +32,7 @@ class ComposerStaticInit25d12fc82d7fed0acadeb34ab70c8d94
         'SiteFunctionality\\Admin\\Admin' => __DIR__ . '/../..' . '/src/Admin/Admin.php',
         'SiteFunctionality\\Admin\\Options' => __DIR__ . '/../..' . '/src/Admin/Options.php',
         'SiteFunctionality\\Api\\RestApi' => __DIR__ . '/../..' . '/src/Api/RestApi.php',
+        'SiteFunctionality\\CustomFields\\Attachment' => __DIR__ . '/../..' . '/src/CustomFields/Attachment.php',
         'SiteFunctionality\\CustomFields\\CustomFields' => __DIR__ . '/../..' . '/src/CustomFields/CustomFields.php',
         'SiteFunctionality\\PostTypes\\PostTypes' => __DIR__ . '/../..' . '/src/PostTypes/PostTypes.php',
         'SiteFunctionality\\PostTypes\\Press' => __DIR__ . '/../..' . '/src/PostTypes/Press.php',

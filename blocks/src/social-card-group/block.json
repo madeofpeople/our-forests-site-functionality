@@ -1,0 +1,43 @@
+{
+    "apiVersion": 2,
+    "version": "1.0.0",
+    "textdomain": "site-functionality",
+    "name": "site-functionality/social-cards-row",
+    "title": "Social Card Group",
+    "category": "media",
+    "collection": "site-functionality",
+    "icon": "format-gallery",
+    "className": "wp-block-site-functionality-social-card",
+    "description": "Display a row of social cards.",
+    "keywords": [
+        "social",
+        "share",
+        "group"
+    ],
+    "attributes": {
+        "className": {
+            "type": "text",
+            "default": "wp-block-site-functionality-social-card"
+        }
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "color": {
+            "background": false,
+            "text": false,
+            "gradients": false,
+            "link": false
+        },
+        "customClassName": true,
+        "defaultStylePicker": false,
+        "__experimentalLayout": false,
+        "multiple": true
+    },
+    "variations": [],
+    "styles": [],
+    "example": {},
+    "style": "file:../../build/style-index.css",
+    "editorScript": "site-functionality",
+    "editorStyle": "file:../../build/index.css"
+}

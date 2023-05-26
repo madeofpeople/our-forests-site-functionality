@@ -3,6 +3,10 @@
  */
 import { __ } from '@wordpress/i18n';
 
+//  Import CSS.
+import './editor.scss';
+// import './style.scss';
+
 /**
  * Internal dependencies
  */

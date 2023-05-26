@@ -6,7 +6,7 @@
  * Author URI:          https://pealutz.me
  * Text Domain:         site-functionality
  * Domain Path:         /languages
- * Version:             1.0.0
+ * Version:             1.0.2
  * Requires at least:   5.8
  * Requires PHP:        7.2
  *
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin Directory
  *
- * @since 0.1.0
+ * @since 1.0.0
  */
 define( 'SITE_CORE_DIR', dirname( __FILE__ ) );
 define( 'SITE_CORE_DIR_URI', plugin_dir_url( __FILE__ ) );
@@ -41,7 +41,7 @@ if ( class_exists( '\Dotenv\Dotenv' ) ) {
 }
 
 const PLUGIN  = 'site-functionality';
-const VERSION = '1.0.0';
+const VERSION = '1.0.2';
 
 function site_functionality_init() {
 	load_plugin_textdomain( 'site-functionality', false, SITE_CORE_DIR . '/languages' );

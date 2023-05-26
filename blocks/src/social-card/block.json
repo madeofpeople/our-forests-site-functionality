@@ -1,0 +1,95 @@
+{
+    "apiVersion": 2,
+    "version": "1.0.0",
+    "textdomain": "site-functionality",
+    "name": "site-functionality/social-card",
+    "title": "Social Card",
+    "category": "media",
+    "collection": "site-functionality",
+    "description": "Display a social card on page",
+    "keywords": [
+        "share",
+        "social"
+    ],
+    "attributes": {
+        "id": {
+            "type": "number",
+            "default": 0
+        },
+        "url": {
+            "type": "string",
+            "default": ""
+        },
+        "alt": {
+            "type": "string",
+            "default": ""
+        },
+        "size": {
+            "type": "string",
+            "default": "social-medium"
+        },
+        "sizes": {
+            "type": "array",
+            "default": []
+        },
+        "title": {
+            "type": "string",
+            "default": "#OurForests #OurResponsibility"
+        },
+        "link": {
+            "type": "string",
+            "default": ""
+        },
+        "instagram": {
+            "type": "string",
+            "default": ""
+        },
+        "twitter": {
+            "type": "string",
+            "default": ""
+        },
+        "message": {
+            "type": "string",
+            "default": ""
+        },
+        "hashtags": {
+            "type": "string",
+            "default": ""
+        },
+        "via": {
+            "type": "string",
+            "default": ""
+        },
+        "related": {
+            "type": "string",
+            "default": ""
+        },
+        "className": {
+            "type": "string",
+            "default": "social-card"
+        }
+    },
+    "supports": {
+        "align": false,
+        "anchor": true,
+        "color": {
+            "background": false,
+            "text": false,
+            "gradients": false,
+            "link": false
+        },
+        "customClassName": true,
+        "defaultStylePicker": false,
+        "__experimentalLayout": false,
+        "__experimentalStyle": false,
+        "__experimentalBorder": false
+    },
+    "example": {
+        "attributes": {
+            "className": "social-card"
+        }
+    },
+    "style": "file:../../build/style-index.css",
+    "editorScript": "site-functionality",
+    "editorStyle": "file:../../build/index.css"
+}

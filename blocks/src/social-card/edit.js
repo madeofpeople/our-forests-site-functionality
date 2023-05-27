@@ -108,6 +108,53 @@ const Edit = (props) => {
 		<img src={url} alt={alt} />
 	);
 
+	const renderFields = (
+		<>
+			<MediaPlaceholder
+				accept="image/*"
+				allowedTypes={ALLOWED_MEDIA_TYPES}
+				onSelect={ setImageAttributes }
+				mediaPreview={sizedImage}
+				multiple={false}
+				handleUpload={true}
+			/>
+			<TextControl
+				label={ __( 'Title', 'site-functionality' )}
+				description={ __( 'Title to add to share posting.', 'site-functionality' ) }
+				value={title}
+				className='share-title'
+				placeholder={ placeholderTitle }
+				type="text"
+				onChange={( title ) => setAttributes({ title })}
+			/>
+			<TextControl
+				label={ __( 'Link', 'site-functionality')}
+				description={ __( 'URL to add to share posting.', 'site-functionality' )}
+				value={link}
+				className='share-link'
+				placeholder={ placeholderUrl }
+				type="url"
+				onChange={( link ) => setAttributes({ link })}
+			/>
+			<TextControl
+				label={__( 'Instagram Link', 'site-functionality' )}
+				description={ __( 'Instagram link to send users to.', 'site-functionality' )}
+				value={ instagram }
+				className='instagram-link'
+				placeholder={ __('https://instagram.com/user', 'site-functionality' ) }
+				type="url"
+				onChange={( instagram ) => setAttributes({ instagram })}
+			/>
+			<TextareaControl
+				label={__( 'Twitter Share Message', 'site-functionality' )}
+				value={ message }
+				onChange={( message ) => setAttributes({ message })}
+				placeholder={ placeholderMessage }
+				className='share-message'
+			/>
+		</>
+	);
+
 	const renderService = ( service ) => {
 		const title = service.toLowerCase().charAt(0).toUpperCase() + service.slice(1);
 		return (
@@ -181,46 +228,7 @@ const Edit = (props) => {
 					title={__('Block Settings', 'site-functionality')}
 					initialOpen={true}
 				>
-				<MediaPlaceholder
-					accept="image/*"
-					allowedTypes={ALLOWED_MEDIA_TYPES}
-					onSelect={setImageAttributes}
-					mediaPreview={sizedImage}
-					multiple={false}
-					handleUpload={true}
-				/>
-				<TextControl
-					label={ __('Title', 'site-functionality')}
-					desscription={ __('Email subject', 'site-functionality')}
-					value={title}
-					className='share-title'
-					placeholder={__('#OurResponsiblity. Pass it On', 'site-functionality')}
-					type="text"
-					onChange={(title) => setAttributes({ title })}
-				/>
-				<TextControl
-					label={ __('Link', 'site-functionality')}
-					desscription={ __('URL to add to share message', 'site-functionality')}
-					value={link}
-					className='share-link'
-					placeholder={__('https://sharelink.com', 'site-functionality')}
-					type="url"
-					onChange={(link) => setAttributes({ link })}
-				/>
-				<TextControl
-					label={__('Instagram Link', 'site-functionality')}
-					desscription={ __('Instagram link to send users to', 'site-functionality')}
-					value={instagram}
-					className='instagram-link'
-					placeholder={__('https://instagram.com/@user', 'site-functionality')}
-					type="url"
-					onChange={(instagram) => setAttributes({ instagram })}
-				/>
-				<TextareaControl
-					label={__('Twitter Share Message', 'site-functionality')}
-					value={ message }
-					onChange={(message) => setAttributes({ message })}
-				/>
+				{ renderFields }
 				</PanelBody>
 			</InspectorControls>
 			<BlockControls>
@@ -233,7 +241,13 @@ const Edit = (props) => {
 					name={!id ? __('Add Image', 'site-functionality') : __('Replace Image', 'site-functionality')}
 				/>
 			</BlockControls>
-			{ blockPreview }
+			{
+				isSelected ? (
+					renderFields
+				) : (
+					blockPreview
+				)
+			}
 		</article>
 	);
 };

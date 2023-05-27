@@ -153,17 +153,21 @@ function enqueue() {
  */
 function services( $service, $attributes ) {
 	global $post;
+	$twitter_acct = 'thinkfilmimpact';
+	$post_id = isset( $attributes['id'] ) ? (int) $attributes['id'] : get_the_ID();
 	$image_size = 'social-large';
-	$thumbnail  = $attributes['id'] ? \wp_get_attachment_image( $attributes['id'], $image_size ) : '';
+	$thumbnail  = \wp_get_attachment_image( $post_id, $image_size );
 
-	$permalink               = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_home_url() );
-	$title                   = ( isset( $attributes['title'] ) && ! empty( $attributes['title'] ) ) ? $attributes['title'] : __( '#OurForests #OurResponsibility', 'site-functionality' );
+	/*** Link attribute or attachment post link */
+	$permalink               = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_the_permalink( $post_id ) );
+	/*** Title attribute or attachment title */
+	$title                   = isset( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : \get_the_title( $post_id );
 	$title_encoded           = rawurlencode( $title );
-	$message                 = isset( $attributes['message'] ) ? $attributes['message'] : '';
+	$message                 = isset( $attributes['message'] ) ? wp_kses_post( $attributes['message'] ) : get_the_content( $post_id );
 	$message_encoded         = rawurlencode( $message );
-	$image                   = $attributes['id'] ? \wp_get_attachment_image_url( $attributes['id'], $image_size ) : '';
+	$image                   = $post_id ? \wp_get_attachment_image_url( $post_id, $image_size ) : '';
 	$image_encoded           = rawurlencode( $image );
-	$twitter_message         = sprintf( '%s - %s', $message, $image );
+	$twitter_message         = !empty( $message ) ? sprintf( '%s - %s', $message, $image ) : $image;
 	$twitter_message_encoded = rawurlencode( $twitter_message );
 	$separator               = '%20&mdash;%20';
 

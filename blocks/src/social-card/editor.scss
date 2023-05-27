@@ -8,6 +8,18 @@
     background-color: var(--wp--preset--color--white);
     padding: 1rem;
 
+    ul {
+        padding-left: 0;
+    }
+
+ }
+
+.wp-block-site-functionality-social-card,
+.block-editor-block-inspector {
+    .block-editor-media-placeholder {
+        margin-bottom: 1rem;
+    }
+
     label {
         margin-top: .25rem;
     }
@@ -33,12 +45,10 @@
         }
     }
 
-    ul {
-        padding-left: 0;
-    }
+    ::placeholder,
+    input::placeholder,
+    textarea::placeholder {
+        color: var( --wp--preset--color--grey-mid ) !important;
+    }    
+}
 
-    .rich-text,
-    .components-text-control__input {
-        border: 1px solid var( --wp--preset--color--grey-mid );
-    }
- }

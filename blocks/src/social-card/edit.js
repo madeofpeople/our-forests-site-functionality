@@ -34,30 +34,13 @@ const TEMPLATE = [
 		'core/image',
 		{
 			className: 'share-image',
-			sizeSlug: 'social-thumbnail'
+			sizeSlug: 'social-medium',
+			linkDestination: false,
 		}
-	],
-	[
-		'core/social-links',
-		{
-			className: 'is-style-logos-only share-links',
-		},
-		[
-			['core/social-link-facebook', { service: 'facebook' }],
-			['core/social-link-twitter', { service: 'twitter' }],
-			['core/social-link-instagram', { service: 'instagram' }],
-		]
-	],
-	[
-		'core/paragraph',
-		{
-			className: 'share-message',
-			placeholder: __('Add share message', 'site-functionality')
-		},
 	]
 ];
 
-const ALLOWED_BLOCKS = ['core/paragraph', 'core/image', 'site-functionality/social-links'];
+const ALLOWED_BLOCKS = ['core/image'];
 
 const Edit = (props) => {
 	const {
@@ -106,6 +89,21 @@ const Edit = (props) => {
 
 	const imageObj = select('core').getMedia(id);
 
+	const blockProps = useBlockProps({
+		className: classNames( className, 'social-post' ),
+	});
+
+	const { children, ...innerBlocksProps } = useInnerBlocksProps( 
+		{
+			className: 'image-group',
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: TEMPLATE,
+			templateLock: "all"
+		}
+	 );
+	
 	const sizedImage = (
 		<img 
 			src={imageObj?.sizes?.[sizeSlug]?.url || imageObj?.sizes?.[sizeSlug]?.url || url} 
@@ -118,16 +116,51 @@ const Edit = (props) => {
 		<img src={url} alt={alt} />
 	);
 
+	const renderService = ( service ) => {
+		const title = service.toLowerCase().charAt(0).toUpperCase() + service.slice(1);
+		return (
+			<li className={`outermost-social-sharing-link outermost-social-sharing-link-${service}`}>
+				<a 
+					className='wp-block-outermost-social-sharing-link-anchor' 
+					href='#'
+					data-vars-ga-category={__('Share Cards', 'site-functionality')}
+					aria-label={__('Share on ' + title, 'site-functionality')}
+				>
+					{icons[service]}
+					<span className='wp-block-outermost-social-sharing-link-label screen-reader-text'>{__('Share on ' + title, 'site-functionality')}</span>
+				</a>
+			</li>
+		)
+	}
+
+	const blockPreview = !! id &&(
+			<>
+				{/* <div className="image-group">
+					{sizedImage}
+				</div> */}
+				<div className="share-actions">
+					<ul className="wp-block-outermost-social-sharing is-style-logos-only">
+						{ renderService('twitter') }
+						{ instagram && (
+							renderService('instagram')
+						) }
+						{ renderService('facebook') }
+						{ renderService('download') }
+					</ul>
+				</div>
+			</>
+	);
+
 	const renderFields = (
 		<>
-			<MediaPlaceholder
+			{/* <MediaPlaceholder
 				accept="image/*"
 				allowedTypes={ALLOWED_MEDIA_TYPES}
 				onSelect={ setImageAttributes }
 				mediaPreview={sizedImage}
 				multiple={false}
 				handleUpload={true}
-			/>
+			/> */}
 			<TextControl
 				label={ __( 'Title', 'site-functionality' )}
 				description={ __( 'Title to add to share posting.', 'site-functionality' ) }
@@ -165,99 +198,38 @@ const Edit = (props) => {
 		</>
 	);
 
-	const renderService = ( service ) => {
-		const title = service.toLowerCase().charAt(0).toUpperCase() + service.slice(1);
-		return (
-			<li className={`outermost-social-sharing-link outermost-social-sharing-link-${service}`}>
-				<a 
-					className='wp-block-outermost-social-sharing-link-anchor' 
-					href='#'
-					data-vars-ga-category={__('Share Cards', 'site-functionality')}
-					aria-label={__('Share on ' + title, 'site-functionality')}
-				>
-					{icons[service]}
-					<span className='wp-block-outermost-social-sharing-link-label screen-reader-text'>{__('Share on ' + title, 'site-functionality')}</span>
-				</a>
-			</li>
-		)
-	}
-
-	const blockProps = useBlockProps({
-		className: classNames(className, 'social-card'),
-	});
-
-	const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: 'social-post'
-		},
-		{
-			allowedBlocks: ALLOWED_BLOCKS,
-			template: TEMPLATE,
-			templateLock: "all"
-		}
+	const inspectorControls = (
+		<InspectorControls>
+			<PanelBody
+				title={__( 'Block Settings', 'site-functionality' )}
+				initialOpen={true}
+			>
+			{ renderFields }
+			</PanelBody>
+		</InspectorControls>
 	);
 
-	const blockPreview = !! id ?(
-		<article  {...innerBlocksProps}>
-			<ul className="image-group">
-				{sizedImage}
-			</ul>
-			<div className="share-actions">
-				<ul className="wp-block-outermost-social-sharing is-style-logos-only">
-					{ renderService('twitter') }
-					{ instagram && (
-						renderService('instagram')
-					) }
-					{ renderService('facebook') }
-					{ renderService('download') }
-				</ul>
-			</div>
-		</article>	
-	) : (
-		<article  {...innerBlocksProps}>
-			<MediaPlaceholder
-				accept="image/*"
+	const blockControls = (
+		<BlockControls>
+			<MediaReplaceFlow
+				mediaId={id}
+				mediaURL={url}
 				allowedTypes={ALLOWED_MEDIA_TYPES}
-				onSelect={setImageAttributes}
-				mediaPreview={sizedImage}
-				multiple={false}
-				handleUpload={true}
-				labels = { { 
-					title: __( 'Select Image', 'site-functionality' ),
-					instructions: __( 'Update block settings in right panel', 'site-functionality' )
-
-				} }
+				accept="image/*"
+				onSelect={ setImageAttributes }
+				name={ !id ? __( 'Add Image', 'site-functionality' ) : __( 'Replace Image', 'site-functionality' ) }
 			/>
-		</article>
+		</BlockControls>
 	);
 
 	return (
 		<article {...blockProps}>
-			<InspectorControls>
-				<PanelBody
-					title={__( 'Block Settings', 'site-functionality' )}
-					initialOpen={true}
-				>
-				{ renderFields }
-				</PanelBody>
-			</InspectorControls>
-			<BlockControls>
-				<MediaReplaceFlow
-					mediaId={id}
-					mediaURL={url}
-					allowedTypes={ALLOWED_MEDIA_TYPES}
-					accept="image/*"
-					onSelect={ setImageAttributes }
-					name={ !id ? __( 'Add Image', 'site-functionality' ) : __( 'Replace Image', 'site-functionality' ) }
-				/>
-			</BlockControls>
-			{
-				isSelected ? (
-					renderFields
-				) : (
-					blockPreview
-				)
-			}
+			{ inspectorControls }
+			{ blockControls }
+			<div {...innerBlocksProps}>
+				{ children }
+			</div>
+			{ blockPreview }
 		</article>
 	);
 };

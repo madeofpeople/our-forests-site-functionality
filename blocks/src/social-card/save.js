@@ -21,15 +21,23 @@ const Save = ( props ) => {
 	} = props;
 
 	const blockProps = useBlockProps.save( {
-		className: classNames( className, 'social-card' ),
-		message
+		className: classNames( className, 'social-post' )
 	} );
 	
-	const innerBlocksProps = useInnerBlocksProps.save( { 
-		className: 'social-card-inner' 
-	} );
+	const { children, ...innerBlocksProps } = useInnerBlocksProps.save( 
+		{
+			className: 'image-group'
+		}
+	);
 
-	return null;
+	// return null;
+	return (
+		<article {...blockProps}>
+			<div {...innerBlocksProps}>
+				{ children }
+			</div>
+		</article>
+	);
 };
 
 export default Save;

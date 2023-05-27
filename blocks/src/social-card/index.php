@@ -25,57 +25,73 @@ if ( ! defined( 'ABSPATH' ) ) {
 function render( $attributes, $content, $block ) {
 	$args               = array();
 	$wrapper_attributes = \get_block_wrapper_attributes( $args );
-	$attributes['size'] = 'social-medium';
 
+	$block_attributes = array();
+	foreach( $block->inner_blocks as $block ) {
+		if( $block->parsed_block['blockName'] === 'core/image' ) {
+			$block_attributes = $block->parsed_block['attrs'];
+			break;
+		}
+	}
+	$attributes = wp_parse_args( $block_attributes, $attributes );
+	
 	ob_start();
-	?>
 
-	<article class="social-post">
+	if( isset( $attributes['id'] ) ) :
+		?>
 
-		<div class="image-group">
-			<?php
-			if ( isset( $attributes['id'] ) ) :
-				echo \wp_get_attachment_image( $attributes['id'], $attributes['size'] );
-			endif;
-			?>
-		</div><!-- .image-group -->
-
-		<div class="share-actions">
-			<ul class="wp-block-outermost-social-sharing is-style-logos-only">
+		<article class="social-post">
+			<div class="image-group">
+				
 				<?php
-				$services = array(
-					'twitter',
-					'facebook',
-					'instagram',
-				);
-				$download = 'download';
-				foreach ( $services as $service ) {
-					if ( 'instagram' === $service && empty( $attributes['instagram'] ) ) {
-						continue;
+				/**
+				 * Add additional attributes to image by adding to `$args` array 
+				 * 
+				 * @link https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
+				 */
+				$args = array();
+				echo \wp_get_attachment_image( $attributes['id'], $attributes['sizeSlug'], false, $args );
+				?>
+			</div><!-- .image-group -->
+
+			<div class="share-actions">
+				<ul class="wp-block-outermost-social-sharing is-style-logos-only">
+					<?php
+					$services = array(
+						'twitter',
+						'facebook',
+						'instagram',
+					);
+					$download = 'download';
+					foreach ( $services as $service ) {
+						if ( 'instagram' === $service && empty( $attributes['instagram'] ) ) {
+							continue;
+						}
+						?>
+						<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $service ); ?>">
+							<a href="<?php echo get_url( $service, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $service, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor">
+							<?php echo get_icon( $service, $attributes ); ?>
+							<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $service, $attributes ) ); ?></span>
+							</a>
+						</li>
+						<?php
 					}
 					?>
-					<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $service ); ?>">
-						<a href="<?php echo get_url( $service, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $service, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor">
-						<?php echo get_icon( $service, $attributes ); ?>
-						<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $service, $attributes ) ); ?></span>
+					<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $download ); ?>">
+						<a href="<?php echo get_url( $download, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $download, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor" download>
+						<?php echo get_icon( $download, $attributes ); ?>
+						<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $download, $attributes ) ); ?></span>
 						</a>
 					</li>
-					<?php
-				}
-				?>
-				<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $download ); ?>">
-					<a href="<?php echo get_url( $download, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $download, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor" download>
-					<?php echo get_icon( $download, $attributes ); ?>
-					<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $download, $attributes ) ); ?></span>
-					</a>
-				</li>
-			</ul><!-- .wp-block-outermost-social-sharing -->
-		</div><!-- .share-actions -->
+				</ul><!-- .wp-block-outermost-social-sharing -->
+			</div><!-- .share-actions -->
 
-	</article><!-- .social-post -->
+		</article><!-- .social-post -->
 
-	<?php
+		<?php
+	endif;
 	$output = ob_get_clean();
+
 	return $output;
 }
 

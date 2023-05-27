@@ -2,13 +2,12 @@
  * The following styles get applied inside the editor only.
  *
  * Replace them with your own styles or remove the file completely.
- */
+ */    
 
  .wp-block-site-functionality-social-card {
     background-color: var(--wp--preset--color--white);
 
     ul {
-        padding: 0;
         margin-top: 0;
         padding: 0;
         list-style: none;
@@ -23,7 +22,6 @@
             justify-content: space-between;
         }
     }
-
  }
 
 .wp-block-site-functionality-social-card,

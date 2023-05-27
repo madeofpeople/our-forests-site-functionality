@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function render( $attributes, $content, $block ) {
 	$args               = array();
 	$wrapper_attributes = \get_block_wrapper_attributes( $args );
-	$attributes['size'] = 'social-medium';
+	$attributes['sizeSlug'] = 'social-medium';
 
 	ob_start();
 	?>
@@ -35,7 +35,7 @@ function render( $attributes, $content, $block ) {
 		<div class="image-group">
 			<?php
 			if ( isset( $attributes['id'] ) ) :
-				echo \wp_get_attachment_image( $attributes['id'], $attributes['size'] );
+				echo \wp_get_attachment_image( $attributes['id'], $attributes['sizeSlug'] );
 			endif;
 			?>
 		</div><!-- .image-group -->

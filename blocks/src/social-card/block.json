@@ -24,7 +24,7 @@
             "type": "string",
             "default": ""
         },
-        "size": {
+        "sizeSlug": {
             "type": "string",
             "default": "social-medium"
         },

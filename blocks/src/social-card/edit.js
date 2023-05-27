@@ -68,6 +68,9 @@ const Edit = (props) => {
 			size,
 			sizes,
 			twitter,
+			placeholderTitle,
+			placeholderUrl,
+			placeholderMessage,
 			instagram,
 		},
 		isSelected,
@@ -81,7 +84,9 @@ const Edit = (props) => {
 				id: null,
 				url: null,
 				alt: null,
-				sizes: []
+				sizes: [],
+				placeholderUrl: null,
+				placeholderMessage: null
 			});
 			return;
 		}
@@ -89,7 +94,10 @@ const Edit = (props) => {
 			id: media.id,
 			url: media.url,
 			alt: media?.alt,
-			sizes: media?.sizes
+			sizes: media?.sizes,
+			placeholderTitle: media?.title,
+			placeholderUrl: media.link,
+			placeholderMessage: media?.description
 		});
 
 		console.log( media );

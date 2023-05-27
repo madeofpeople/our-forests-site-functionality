@@ -161,9 +161,9 @@ function services( $service, $attributes ) {
 	/*** Link attribute or attachment post link */
 	$permalink               = ( isset( $attributes['link'] ) && ! empty( $attributes['link'] ) ) ? rawurlencode( $attributes['link'] ) : rawurlencode( \get_the_permalink( $post_id ) );
 	/*** Title attribute or attachment title */
-	$title                   = isset( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : \get_the_title( $post_id );
+	$title                   = isset( $attributes['title'] ) && ! empty( $attributes['title'] ) ? wp_kses_post( $attributes['title'] ) : \get_the_title( $post_id );
 	$title_encoded           = rawurlencode( $title );
-	$message                 = isset( $attributes['message'] ) ? wp_kses_post( $attributes['message'] ) : get_the_content( $post_id );
+	$message                 = isset( $attributes['message'] ) && ! empty( $attributes['message'] ) ? wp_kses_post( $attributes['message'] ) : \get_post_field( 'post_content', $post_id );
 	$message_encoded         = rawurlencode( $message );
 	$image                   = $post_id ? \wp_get_attachment_image_url( $post_id, $image_size ) : '';
 	$image_encoded           = rawurlencode( $image );

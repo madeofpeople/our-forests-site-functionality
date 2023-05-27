@@ -34,7 +34,7 @@ const TEMPLATE = [
 		'core/image',
 		{
 			className: 'share-image',
-			sizeSlug: 'medium'
+			sizeSlug: 'social-thumbnail'
 		}
 	],
 	[
@@ -68,7 +68,7 @@ const Edit = (props) => {
 			id,
 			alt,
 			link,
-			size,
+			sizeSlug,
 			sizes,
 			twitter,
 			placeholderTitle,
@@ -108,9 +108,9 @@ const Edit = (props) => {
 
 	const sizedImage = (
 		<img 
-			src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.[size]?.url || url} 
-			height={imageObj?.sizes?.[size]?.height || imageObj?.sizes?.[size]?.height || imageObj?.height} 
-			width={imageObj?.sizes?.[size]?.width || imageObj?.sizes?.[size]?.width || imageObj?.width} 
+			src={imageObj?.sizes?.[sizeSlug]?.url || imageObj?.sizes?.[sizeSlug]?.url || url} 
+			height={imageObj?.sizes?.[sizeSlug]?.height || imageObj?.sizes?.[sizeSlug]?.height || imageObj?.height} 
+			width={imageObj?.sizes?.[sizeSlug]?.width || imageObj?.sizes?.[sizeSlug]?.width || imageObj?.width} 
 		/>
 	);
 

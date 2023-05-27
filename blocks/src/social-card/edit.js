@@ -15,7 +15,10 @@ import {
 	TextareaControl,
 	TextControl
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { 
+	useState, 
+	Fragment 
+} from '@wordpress/element';
 import { select, useSelect } from '@wordpress/data';
 
 import { __ } from '@wordpress/i18n';
@@ -78,8 +81,8 @@ const Edit = (props) => {
 		className,
 	} = props;
 
-	const setImageAttributes = (media) => {
-		if (!media || !media.id) {
+	const setImageAttributes = ( media ) => {
+		if ( !media || !media.id ) {
 			setAttributes({
 				id: null,
 				url: null,
@@ -99,11 +102,10 @@ const Edit = (props) => {
 			placeholderUrl: media.link,
 			placeholderMessage: media?.description
 		});
-
-		console.log( media );
 	};
 
 	const imageObj = select('core').getMedia(id);
+
 	const sizedImage = (
 		<img 
 			src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.[size]?.url || url} 
@@ -233,7 +235,7 @@ const Edit = (props) => {
 		<article {...blockProps}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Block Settings', 'site-functionality')}
+					title={__( 'Block Settings', 'site-functionality' )}
 					initialOpen={true}
 				>
 				{ renderFields }
@@ -245,8 +247,8 @@ const Edit = (props) => {
 					mediaURL={url}
 					allowedTypes={ALLOWED_MEDIA_TYPES}
 					accept="image/*"
-					onSelect={setImageAttributes}
-					name={!id ? __('Add Image', 'site-functionality') : __('Replace Image', 'site-functionality')}
+					onSelect={ setImageAttributes }
+					name={ !id ? __( 'Add Image', 'site-functionality' ) : __( 'Replace Image', 'site-functionality' ) }
 				/>
 			</BlockControls>
 			{

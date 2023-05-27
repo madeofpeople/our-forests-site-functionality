@@ -34,7 +34,7 @@ const TEMPLATE = [
 		'core/image',
 		{
 			className: 'share-image',
-			sizeSlug: 'medium'
+			sizeSlug: 'social-thumbnail'
 		}
 	],
 	[
@@ -68,7 +68,7 @@ const Edit = (props) => {
 			id,
 			alt,
 			link,
-			size,
+			sizeSlug,
 			sizes,
 			twitter,
 			placeholderTitle,
@@ -108,9 +108,9 @@ const Edit = (props) => {
 
 	const sizedImage = (
 		<img 
-			src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.[size]?.url || url} 
-			height={imageObj?.sizes?.[size]?.height || imageObj?.sizes?.[size]?.height || imageObj?.height} 
-			width={imageObj?.sizes?.[size]?.width || imageObj?.sizes?.[size]?.width || imageObj?.width} 
+			src={imageObj?.sizes?.[sizeSlug]?.url || imageObj?.sizes?.[sizeSlug]?.url || url} 
+			height={imageObj?.sizes?.[sizeSlug]?.height || imageObj?.sizes?.[sizeSlug]?.height || imageObj?.height} 
+			width={imageObj?.sizes?.[sizeSlug]?.width || imageObj?.sizes?.[sizeSlug]?.width || imageObj?.width} 
 		/>
 	);
 
@@ -198,7 +198,7 @@ const Edit = (props) => {
 	);
 
 	const blockPreview = !! id ?(
-		<article  {...innerBlocksProps}>
+		<>
 			<ul className="image-group">
 				{sizedImage}
 			</ul>
@@ -212,23 +212,21 @@ const Edit = (props) => {
 					{ renderService('download') }
 				</ul>
 			</div>
-		</article>	
+		</>	
 	) : (
-		<article  {...innerBlocksProps}>
-			<MediaPlaceholder
-				accept="image/*"
-				allowedTypes={ALLOWED_MEDIA_TYPES}
-				onSelect={setImageAttributes}
-				mediaPreview={sizedImage}
-				multiple={false}
-				handleUpload={true}
-				labels = { { 
-					title: __( 'Select Image', 'site-functionality' ),
-					instructions: __( 'Update block settings in right panel', 'site-functionality' )
+		<MediaPlaceholder
+			accept="image/*"
+			allowedTypes={ALLOWED_MEDIA_TYPES}
+			onSelect={setImageAttributes}
+			mediaPreview={sizedImage}
+			multiple={false}
+			handleUpload={true}
+			labels = { { 
+				title: __( 'Select Image', 'site-functionality' ),
+				instructions: __( 'Update block settings in right panel', 'site-functionality' )
 
-				} }
-			/>
-		</article>
+			} }
+		/>
 	);
 
 	return (
@@ -251,13 +249,9 @@ const Edit = (props) => {
 					name={ !id ? __( 'Add Image', 'site-functionality' ) : __( 'Replace Image', 'site-functionality' ) }
 				/>
 			</BlockControls>
-			{
-				isSelected ? (
-					renderFields
-				) : (
-					blockPreview
-				)
-			}
+			<article  {...innerBlocksProps}>
+				{ blockPreview }
+			</article>
 		</article>
 	);
 };

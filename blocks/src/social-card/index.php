@@ -153,8 +153,6 @@ function enqueue() {
  */
 function services( $service, $attributes ) {
 	global $post;
-	$post       = \get_post( $post->ID );
-	$post_id    = $post->ID;
 	$image_size = 'social-large';
 	$thumbnail  = $attributes['id'] ? \wp_get_attachment_image( $attributes['id'], $image_size ) : '';
 

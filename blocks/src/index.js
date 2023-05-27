@@ -6,7 +6,7 @@ import * as pageNav from './page-nav';
 import * as linkGroup from './link-group';
 // import * as socialCards from './social-cards';
 import * as socialCard from './social-card';
-import * as socialCardGroup from './social-card-group';
+// import * as socialCardGroup from './social-card-group';
 
 const blocks = [
 	defender,
@@ -14,7 +14,7 @@ const blocks = [
 	linkGroup,
 	// socialCards,
 	socialCard,
-	socialCardGroup
+	// socialCardGroup
 ];
 
 /**

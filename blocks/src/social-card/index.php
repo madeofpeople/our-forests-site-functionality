@@ -28,16 +28,14 @@ function render( $attributes, $content, $block ) {
 	$attributes['sizeSlug'] = 'social-medium';
 
 	ob_start();
+
+	if ( isset( $attributes['id'] ) && ! empty( $attributes['id'] ) ) :
 	?>
 
 	<article class="social-post">
 
 		<div class="image-group">
-			<?php
-			if ( isset( $attributes['id'] ) ) :
-				echo \wp_get_attachment_image( $attributes['id'], $attributes['sizeSlug'] );
-			endif;
-			?>
+			<?php echo \wp_get_attachment_image( $attributes['id'], $attributes['sizeSlug'] ); ?>
 		</div><!-- .image-group -->
 
 		<div class="share-actions">
@@ -75,7 +73,10 @@ function render( $attributes, $content, $block ) {
 	</article><!-- .social-post -->
 
 	<?php
+	endif;
+
 	$output = ob_get_clean();
+	
 	return $output;
 }
 

@@ -45,28 +45,22 @@ function render( $attributes, $content, $block ) {
 					'twitter',
 					'facebook',
 					'instagram',
+					'download'
 				);
-				$download = 'download';
 				foreach ( $services as $service ) {
 					if ( 'instagram' === $service && empty( $attributes['instagram'] ) ) {
 						continue;
 					}
 					?>
 					<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $service ); ?>">
-						<a href="<?php echo get_url( $service, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $service, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor">
-						<?php echo get_icon( $service, $attributes ); ?>
-						<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $service, $attributes ) ); ?></span>
+						<a href="<?php echo get_url( $service, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $service, $attributes ) ); ?>" rel="noopener nofollow"<?php echo 'download' !== $service ? ' target="_blank"' : ''; ?> class="wp-block-outermost-social-sharing-link-anchor"<?php echo 'download' === $service ? ' download': ''; ?>>
+							<?php echo get_icon( $service, $attributes ); ?>
+							<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $service, $attributes ) ); ?></span>
 						</a>
 					</li>
 					<?php
 				}
 				?>
-				<li class="outermost-social-sharing-link outermost-social-sharing-link-<?php echo \esc_attr( $download ); ?>">
-					<a href="<?php echo get_url( $download, $attributes ); ?>" data-vars-ga-category="<?php echo esc_attr( 'Share Cards' ); ?>" aria-label="<?php echo esc_attr( get_label( $download, $attributes ) ); ?>" rel="noopener nofollow" target="_blank" class="wp-block-outermost-social-sharing-link-anchor" download>
-					<?php echo get_icon( $download, $attributes ); ?>
-					<span class="wp-block-outermost-social-sharing-link-label screen-reader-text"><?php echo esc_html( get_label( $download, $attributes ) ); ?></span>
-					</a>
-				</li>
 			</ul><!-- .wp-block-outermost-social-sharing -->
 		</div><!-- .share-actions -->
 

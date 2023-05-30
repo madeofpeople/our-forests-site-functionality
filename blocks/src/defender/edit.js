@@ -130,6 +130,39 @@ const TEMPLATE = [
 						}
 					],
 					[
+						'core/social-links',
+						{
+							className: 'is-style-logos-only defender__social-links',
+							iconColor: 'white',
+							iconColorValue: '#fff',
+							openInNewTab: true,
+							showLabels: true,
+							size: 'has-normal-icon-size',
+							layout: {
+								type: 'flex',
+								orientation: 'vertical'
+							}
+						},
+						[
+							[
+								'core/social-link',
+								{
+									url: 'https://instagram.com/username',
+									service: 'instagram',
+									label: 'username'
+								}
+							],
+							[
+								'core/social-link',
+								{
+									url: 'https://twitter.com/handle',
+									service: 'twitter',
+									label: 'handle'
+								}
+							]
+						]
+					],
+					[
 						'core/paragraph',
 						{
 							className: 'defender__forest-description content',

@@ -15,7 +15,10 @@ import {
 	TextareaControl,
 	TextControl
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { 
+	useState, 
+	Fragment 
+} from '@wordpress/element';
 import { select, useSelect } from '@wordpress/data';
 
 import { __ } from '@wordpress/i18n';
@@ -31,7 +34,7 @@ const TEMPLATE = [
 		'core/image',
 		{
 			className: 'share-image',
-			sizeSlug: 'medium'
+			sizeSlug: 'social-thumbnail'
 		}
 	],
 	[
@@ -65,9 +68,12 @@ const Edit = (props) => {
 			id,
 			alt,
 			link,
-			size,
+			sizeSlug,
 			sizes,
 			twitter,
+			placeholderTitle,
+			placeholderUrl,
+			placeholderMessage,
 			instagram,
 		},
 		isSelected,
@@ -75,13 +81,15 @@ const Edit = (props) => {
 		className,
 	} = props;
 
-	const setImageAttributes = (media) => {
-		if (!media || !media.id) {
+	const setImageAttributes = ( media ) => {
+		if ( !media || !media.id ) {
 			setAttributes({
 				id: null,
 				url: null,
 				alt: null,
-				sizes: []
+				sizes: [],
+				placeholderUrl: null,
+				placeholderMessage: null
 			});
 			return;
 		}
@@ -89,23 +97,72 @@ const Edit = (props) => {
 			id: media.id,
 			url: media.url,
 			alt: media?.alt,
-			sizes: media?.sizes
+			sizes: media?.sizes,
+			placeholderTitle: media?.title,
+			placeholderUrl: media.link,
+			placeholderMessage: media?.description
 		});
-
-		console.log( media );
 	};
 
 	const imageObj = select('core').getMedia(id);
+
 	const sizedImage = (
 		<img 
-			src={imageObj?.sizes?.[size]?.url || imageObj?.sizes?.[size]?.url || url} 
-			height={imageObj?.sizes?.[size]?.height || imageObj?.sizes?.[size]?.height || imageObj?.height} 
-			width={imageObj?.sizes?.[size]?.width || imageObj?.sizes?.[size]?.width || imageObj?.width} 
+			src={imageObj?.sizes?.[sizeSlug]?.url || imageObj?.sizes?.[sizeSlug]?.url || url} 
+			height={imageObj?.sizes?.[sizeSlug]?.height || imageObj?.sizes?.[sizeSlug]?.height || imageObj?.height} 
+			width={imageObj?.sizes?.[sizeSlug]?.width || imageObj?.sizes?.[sizeSlug]?.width || imageObj?.width} 
 		/>
 	);
 
 	const image = !!url && (
 		<img src={url} alt={alt} />
+	);
+
+	const renderFields = (
+		<>
+			<MediaPlaceholder
+				accept="image/*"
+				allowedTypes={ALLOWED_MEDIA_TYPES}
+				onSelect={ setImageAttributes }
+				mediaPreview={sizedImage}
+				multiple={false}
+				handleUpload={true}
+			/>
+			<TextControl
+				label={ __( 'Title', 'site-functionality' )}
+				description={ __( 'Title to add to share posting.', 'site-functionality' ) }
+				value={title}
+				className='share-title'
+				placeholder={ placeholderTitle }
+				type="text"
+				onChange={( title ) => setAttributes({ title })}
+			/>
+			<TextControl
+				label={ __( 'Link', 'site-functionality')}
+				description={ __( 'URL to add to share posting.', 'site-functionality' )}
+				value={link}
+				className='share-link'
+				placeholder={ placeholderUrl }
+				type="url"
+				onChange={( link ) => setAttributes({ link })}
+			/>
+			<TextControl
+				label={__( 'Instagram Link', 'site-functionality' )}
+				description={ __( 'Instagram link to send users to.', 'site-functionality' )}
+				value={ instagram }
+				className='instagram-link'
+				placeholder={ __('https://instagram.com/user', 'site-functionality' ) }
+				type="url"
+				onChange={( instagram ) => setAttributes({ instagram })}
+			/>
+			<TextareaControl
+				label={__( 'Twitter Share Message', 'site-functionality' )}
+				value={ message }
+				onChange={( message ) => setAttributes({ message })}
+				placeholder={ placeholderMessage }
+				className='share-message'
+			/>
+		</>
 	);
 
 	const renderService = ( service ) => {
@@ -141,7 +198,7 @@ const Edit = (props) => {
 	);
 
 	const blockPreview = !! id ?(
-		<article  {...innerBlocksProps}>
+		<>
 			<ul className="image-group">
 				{sizedImage}
 			</ul>
@@ -155,72 +212,31 @@ const Edit = (props) => {
 					{ renderService('download') }
 				</ul>
 			</div>
-		</article>	
+		</>	
 	) : (
-		<article  {...innerBlocksProps}>
-			<MediaPlaceholder
-				accept="image/*"
-				allowedTypes={ALLOWED_MEDIA_TYPES}
-				onSelect={setImageAttributes}
-				mediaPreview={sizedImage}
-				multiple={false}
-				handleUpload={true}
-				labels = { { 
-					title: __( 'Select Image', 'site-functionality' ),
-					instructions: __( 'Update block settings in right panel', 'site-functionality' )
+		<MediaPlaceholder
+			accept="image/*"
+			allowedTypes={ALLOWED_MEDIA_TYPES}
+			onSelect={setImageAttributes}
+			mediaPreview={sizedImage}
+			multiple={false}
+			handleUpload={true}
+			labels = { { 
+				title: __( 'Select Image', 'site-functionality' ),
+				instructions: __( 'Update block settings in right panel', 'site-functionality' )
 
-				} }
-			/>
-		</article>
+			} }
+		/>
 	);
 
 	return (
 		<article {...blockProps}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Block Settings', 'site-functionality')}
+					title={__( 'Block Settings', 'site-functionality' )}
 					initialOpen={true}
 				>
-				<MediaPlaceholder
-					accept="image/*"
-					allowedTypes={ALLOWED_MEDIA_TYPES}
-					onSelect={setImageAttributes}
-					mediaPreview={sizedImage}
-					multiple={false}
-					handleUpload={true}
-				/>
-				<TextControl
-					label={ __('Title', 'site-functionality')}
-					desscription={ __('Email subject', 'site-functionality')}
-					value={title}
-					className='share-title'
-					placeholder={__('#OurResponsiblity. Pass it On', 'site-functionality')}
-					type="text"
-					onChange={(title) => setAttributes({ title })}
-				/>
-				<TextControl
-					label={ __('Link', 'site-functionality')}
-					desscription={ __('URL to add to share message', 'site-functionality')}
-					value={link}
-					className='share-link'
-					placeholder={__('https://sharelink.com', 'site-functionality')}
-					type="url"
-					onChange={(link) => setAttributes({ link })}
-				/>
-				<TextControl
-					label={__('Instagram Link', 'site-functionality')}
-					desscription={ __('Instagram link to send users to', 'site-functionality')}
-					value={instagram}
-					className='instagram-link'
-					placeholder={__('https://instagram.com/@user', 'site-functionality')}
-					type="url"
-					onChange={(instagram) => setAttributes({ instagram })}
-				/>
-				<TextareaControl
-					label={__('Twitter Share Message', 'site-functionality')}
-					value={ message }
-					onChange={(message) => setAttributes({ message })}
-				/>
+				{ renderFields }
 				</PanelBody>
 			</InspectorControls>
 			<BlockControls>
@@ -229,11 +245,13 @@ const Edit = (props) => {
 					mediaURL={url}
 					allowedTypes={ALLOWED_MEDIA_TYPES}
 					accept="image/*"
-					onSelect={setImageAttributes}
-					name={!id ? __('Add Image', 'site-functionality') : __('Replace Image', 'site-functionality')}
+					onSelect={ setImageAttributes }
+					name={ !id ? __( 'Add Image', 'site-functionality' ) : __( 'Replace Image', 'site-functionality' ) }
 				/>
 			</BlockControls>
-			{ blockPreview }
+			<article  {...innerBlocksProps}>
+				{ blockPreview }
+			</article>
 		</article>
 	);
 };

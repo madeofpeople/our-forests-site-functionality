@@ -24,7 +24,7 @@
             "type": "string",
             "default": ""
         },
-        "size": {
+        "sizeSlug": {
             "type": "string",
             "default": "social-medium"
         },
@@ -34,7 +34,7 @@
         },
         "title": {
             "type": "string",
-            "default": "#OurForests #OurResponsibility"
+            "default": ""
         },
         "link": {
             "type": "string",
@@ -49,6 +49,18 @@
             "default": ""
         },
         "message": {
+            "type": "string",
+            "default": ""
+        },
+        "placeholderTitle": {
+            "type": "string",
+            "default": "Our Forests. #OurResponsiblity. Pass it On"
+        },
+        "placeholderUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "placeholderMessage": {
             "type": "string",
             "default": ""
         },

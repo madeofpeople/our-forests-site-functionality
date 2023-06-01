@@ -35,6 +35,7 @@ class Admin extends Base {
 	 */
 	public function init() {
 		new Options( $this->version, $this->plugin_name );
+		add_filter( 'trp_translating_capability', array( $this, 'translating_capability' ) );
 	}
 
 	/**
@@ -45,6 +46,19 @@ class Admin extends Base {
 	 */
 	public function modify_admin_menu( $args ) {
 		return $args;
+	}
+
+	/**
+	 * Modify capability required for TranslatePress
+	 * 
+	 * @link https://wordpress.org/documentation/article/roles-and-capabilities/#editor
+	 *
+	 * @param string $capability
+	 * @return string $capability
+	 */
+	public function translating_capability( $capability ) : string {
+		$capability = 'publish_pages';
+		return $capability;
 	}
 
 	/**

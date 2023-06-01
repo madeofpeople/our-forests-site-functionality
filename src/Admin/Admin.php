@@ -50,12 +50,14 @@ class Admin extends Base {
 
 	/**
 	 * Modify capability required for TranslatePress
+	 * 
+	 * @link https://wordpress.org/documentation/article/roles-and-capabilities/#editor
 	 *
 	 * @param string $capability
 	 * @return string $capability
 	 */
 	public function translating_capability( $capability ) : string {
-		$capability = 'publish_posts';
+		$capability = 'publish_pages';
 		return $capability;
 	}
 

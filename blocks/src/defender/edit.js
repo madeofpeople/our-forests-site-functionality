@@ -74,24 +74,6 @@ const TEMPLATE = [
 										orientation: 'vertical'
 									}
 								},
-								[
-									[
-										'core/social-link',
-										{
-											url: 'https://instagram.com/username',
-											service: 'instagram',
-											label: 'username'
-										}
-									],
-									[
-										'core/social-link',
-										{
-											url: 'https://twitter.com/handle',
-											service: 'twitter',
-											label: 'handle'
-										}
-									]
-								]
 							],
 							[
 								'core/paragraph',
